@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:Barlow,sans-serif;background:#FAFAF8;color:#141414;display:grid;grid-template-columns:232px 1fr 420px}
+.rail{background:#1C3E9C;color:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:4px}
+.brand{font:800 26px/1 'Barlow Condensed';letter-spacing:.01em;padding:0 10px 28px}
+.brand span{color:#F1EE3A}
+.nav{display:flex;align-items:center;gap:10px;padding:10px;border-radius:6px;font-weight:500;font-size:15px;color:#D5DEF7}
+.nav.on{background:#fff;color:#1C3E9C;font-weight:700}
+.nav i{width:16px;height:16px;border:2px solid currentColor;border-radius:4px;display:block}
+.cap{margin-top:auto;background:#163381;border-radius:8px;padding:14px;font-size:13px;color:#D5DEF7}
+.cap b{display:block;font:700 30px/1 'Barlow Condensed';color:#fff;margin-bottom:4px}
+.main{padding:24px 28px;display:flex;flex-direction:column;gap:18px;border-right:1px solid #E4E3DE}
+.search{display:grid;grid-template-columns:1.4fr 1fr 120px 130px;gap:10px}
+.f{border:1.5px solid #D9D8D2;border-radius:8px;padding:10px 12px;background:#fff}
+.f small{display:block;font-size:12px;color:#6B6A63;font-weight:600}
+.f div{font-size:15px;font-weight:600;margin-top:2px}
+.go{background:#141414;color:#fff;border-radius:8px;font:700 16px 'Barlow';display:grid;place-items:center}
+.sum{display:flex;gap:28px;align-items:baseline;font-size:15px;color:#4A4943}
+.sum b{font:700 28px 'Barlow Condensed';color:#141414;margin-right:6px}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tab{padding:6px 12px;border-radius:999px;border:1.5px solid #D9D8D2;font-weight:600;font-size:13px}
+.tab.on{background:#141414;color:#fff;border-color:#141414}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:12px;color:#6B6A63;text-align:left;font-weight:600;padding:8px;border-bottom:1.5px solid #141414}
+td{padding:10px 8px;border-bottom:1px solid #E4E3DE;font-size:14px;vertical-align:middle}
+tr.dim .tag{opacity:.5;filter:saturate(.4)}
+tr.sel td{background:#fff}
+.tag{width:96px;height:58px;border-radius:4px;padding:6px 8px;position:relative;font-family:'Barlow Condensed';box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.tag:before{content:'';position:absolute;top:6px;right:8px;width:7px;height:7px;border-radius:50%;background:#FAFAF8;box-shadow:inset 0 1px 1px rgba(0,0,0,.35)}
+.tag b{font-weight:800;font-size:30px;line-height:1}
+.tag b sup{font-size:12px;vertical-align:top;margin-left:2px}
+.tag em{display:block;font-style:normal;font-weight:700;font-size:11px;letter-spacing:.04em}
+.hot{background:#FF3D87}.warm{background:#F1EE3A}.cold{background:#fff;border:1.5px solid #D9D8D2}
+.n{font-weight:700;font-size:15px}.s{color:#6B6A63;font-size:13px}
+.st{font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;background:#EEF1FA;color:#1C3E9C}
+.side{padding:24px;display:flex;flex-direction:column;gap:16px;background:#fff}
+.side h2{font:700 24px/1.1 'Barlow';}
+.big{display:flex;gap:16px;align-items:center}
+.big .tag{width:140px;height:84px}.big .tag b{font-size:46px}
+.conta{border-top:1.5px solid #141414;font-variant-numeric:tabular-nums}
+.conta div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed #D9D8D2;font-size:14px}
+.conta .p{font-weight:700;color:#0F7A3D}.conta .m{font-weight:700;color:#C0262D}
+.conta .t{border-bottom:none;border-top:1.5px solid #141414;font:800 22px 'Barlow Condensed'}
+.msg{background:#F4F4F0;border-radius:8px;padding:12px;font-size:14px;line-height:1.45}
+.wa{background:#141414;color:#fff;border-radius:8px;padding:13px;text-align:center;font-weight:700;font-size:16px}
+</style></head><body>
+<aside class="rail">
+<div class="brand">Synch<span>.</span>Search</div>
+<div class="nav on"><i></i>Prospectar</div>
+<div class="nav"><i></i>Fila de hoje</div>
+<div class="nav"><i></i>Pipeline</div>
+<div class="nav"><i></i>Mapa</div>
+<div class="nav"><i></i>Como pontuamos</div>
+<div class="nav"><i></i>Configurações</div>
+<div class="cap"><b>18 / 25</b>abordagens de hoje cabem no seu dia. 7 vão para amanhã.</div>
+</aside>
+<main class="main">
+<div class="search">
+<div class="f"><small>Segmento</small><div>Dentistas, Estética, Fisioterapia</div></div>
+<div class="f"><small>Cidade</small><div>Campinas, SP</div></div>
+<div class="f"><small>Raio</small><div>5 km</div></div>
+<div class="go">Buscar leads</div>
+</div>
+<div class="sum"><span><b>142</b>encontrados</span><span><b>61</b>sem site</span><span><b>23</b>quentes</span>
+<div class="tabs"><span class="tab on">Quentes</span><span class="tab">Mornos</span><span class="tab">Todos</span></div></div>
+<table>
+<tr><th>Nota</th><th>Estabelecimento</th><th>Google</th><th>Contato</th><th>Status</th></tr>
+<tr class="sel"><td><div class="tag hot"><b>91<sup>pts</sup></b><em>SITE FORA DO AR</em></div></td><td><div class="n">Odonto Sorriso Cambuí</div><div class="s">Dentista · Cambuí</div></td><td>4,8 ★ · 312</td><td>WhatsApp</td><td><span class="st">Novo</span></td></tr>
+<tr class="dim"><td><div class="tag hot"><b>86<sup>pts</sup></b><em>SÓ INSTAGRAM</em></div></td><td><div class="n">Studio Bella Estética</div><div class="s">Estética · Taquaral</div></td><td>4,9 ★ · 187</td><td>WhatsApp</td><td><span class="st">Novo</span></td></tr>
+<tr class="dim"><td><div class="tag hot"><b>82<sup>pts</sup></b><em>SEM SITE</em></div></td><td><div class="n">FisioVida Barão Geraldo</div><div class="s">Fisioterapia · Barão Geraldo</div></td><td>4,7 ★ · 96</td><td>WhatsApp</td><td><span class="st">Contatado</span></td></tr>
+<tr class="dim"><td><div class="tag warm"><b>68<sup>pts</sup></b><em>SEM HTTPS</em></div></td><td><div class="n">Clínica Dra. Helena Prado</div><div class="s">Dermatologia · Centro</div></td><td>4,5 ★ · 64</td><td>Fixo</td><td><span class="st">Novo</span></td></tr>
+<tr class="dim"><td><div class="tag warm"><b>61<sup>pts</sup></b><em>SITE DE 2016</em></div></td><td><div class="n">Pilates Guanabara</div><div class="s">Fisioterapia · Guanabara</div></td><td>4,6 ★ · 41</td><td>WhatsApp</td><td><span class="st">Novo</span></td></tr>
+<tr class="dim"><td><div class="tag cold"><b>34<sup>pts</sup></b><em>SITE OK</em></div></td><td><div class="n">OdontoCompany Castelo</div><div class="s">Dentista · franquia</div></td><td>4,2 ★ · 1.204</td><td>Fixo</td><td><span class="st">Ignorado</span></td></tr>
+</table>
+</main>
+<aside class="side">
+<div class="big"><div class="tag hot"><b>91<sup>pts</sup></b><em>SITE FORA DO AR</em></div><div><h2>Odonto Sorriso Cambuí</h2><div class="s">R. Coronel Quirino · Cambuí</div></div></div>
+<div class="conta">
+<div><span>Site informado não responde</span><span class="p">+24</span></div>
+<div><span>312 avaliações, nota 4,8</span><span class="p">+18</span></div>
+<div><span>Nicho de ticket alto (odontologia)</span><span class="p">+14</span></div>
+<div><span>Celular com WhatsApp</span><span class="p">+9</span></div>
+<div><span>Perfil Google com fotos e horário</span><span class="p">+7</span></div>
+<div><span>Concorrência com site no bairro</span><span class="m">−4</span></div>
+<div class="t"><span>Propensão</span><span>91</span></div>
+</div>
+<div class="msg">Oi, tudo bem? Vi que a Odonto Sorriso tem 4,8 estrelas com 312 avaliações, mas o site de vocês está fora do ar — quem pesquisa no Google cai numa página de erro…</div>
+<div class="wa">Abrir no WhatsApp</div>
+</aside>
+</body></html>

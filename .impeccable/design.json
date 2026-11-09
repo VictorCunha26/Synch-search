@@ -1,0 +1,983 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T16:15:06Z",
+  "title": "Design System: Synch Search",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Preto Synch",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Branco",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "bg-subtle": {
+        "role": "neutral",
+        "displayName": "Névoa",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "bg-muted": {
+        "role": "neutral",
+        "displayName": "Cinza Claro",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "bg-hover": {
+        "role": "neutral",
+        "displayName": "Cinza Hover",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Linha",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Linha Forte",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "border-hover": {
+        "role": "neutral",
+        "displayName": "Linha Hover",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "border-hover-field": {
+        "role": "neutral",
+        "displayName": "Linha Hover de Campo",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Preto Synch (texto)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "text-2": {
+        "role": "neutral",
+        "displayName": "Cinza Médio",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "text-3": {
+        "role": "neutral",
+        "displayName": "Cinza Suave",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "notice-fg": {
+        "role": "neutral",
+        "displayName": "Grafite de Aviso",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Preto Synch (ação)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Preto Grafite",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Cinza Seleção",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "accent-text": {
+        "role": "primary",
+        "displayName": "Preto Synch (links)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Trilho Preto",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail-hover": {
+        "role": "neutral",
+        "displayName": "Trilho Hover",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail-active": {
+        "role": "neutral",
+        "displayName": "Trilho Ativo",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail-border": {
+        "role": "neutral",
+        "displayName": "Borda do Trilho",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail-border-hover": {
+        "role": "neutral",
+        "displayName": "Borda do Trilho Hover",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail-text": {
+        "role": "neutral",
+        "displayName": "Texto do Trilho",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rail-text-strong": {
+        "role": "neutral",
+        "displayName": "Branco do Trilho",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "hot": {
+        "role": "secondary",
+        "displayName": "Coral Quente",
+        "tonalRamp": [
+          "#220000",
+          "#4f0009",
+          "#81101c",
+          "#b72530",
+          "#dd5657",
+          "#f78a86",
+          "#ffb7b2",
+          "#ffdcd7"
+        ]
+      },
+      "hot-fg": {
+        "role": "secondary",
+        "displayName": "Coral Quente (texto)",
+        "tonalRamp": [
+          "#210000",
+          "#4d060a",
+          "#7d1a1d",
+          "#b22f32",
+          "#d75c58",
+          "#f28e87",
+          "#ffbab3",
+          "#ffded8"
+        ]
+      },
+      "hot-bg": {
+        "role": "secondary",
+        "displayName": "Coral Quente (fundo)",
+        "tonalRamp": [
+          "#0e0a0a",
+          "#2b2525",
+          "#4b4243",
+          "#6f6363",
+          "#928686",
+          "#b5abab",
+          "#d6cfcf",
+          "#f3eded"
+        ]
+      },
+      "warm": {
+        "role": "secondary",
+        "displayName": "Âmbar Morno",
+        "tonalRamp": [
+          "#1a0500",
+          "#401c00",
+          "#6a3600",
+          "#985300",
+          "#bb7900",
+          "#d9a25b",
+          "#f3c995",
+          "#ffe9c3"
+        ]
+      },
+      "warm-fg": {
+        "role": "secondary",
+        "displayName": "Âmbar Morno (texto)",
+        "tonalRamp": [
+          "#180600",
+          "#3d1d00",
+          "#663805",
+          "#935515",
+          "#b67945",
+          "#d4a27a",
+          "#f0c8a9",
+          "#ffe8d1"
+        ]
+      },
+      "warm-bg": {
+        "role": "secondary",
+        "displayName": "Âmbar Morno (fundo)",
+        "tonalRamp": [
+          "#0d0b06",
+          "#2a261d",
+          "#4b4438",
+          "#6e6555",
+          "#918878",
+          "#b4ada0",
+          "#d6d0c6",
+          "#f2eee6"
+        ]
+      },
+      "cold": {
+        "role": "secondary",
+        "displayName": "Cinza Frio",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "cold-fg": {
+        "role": "secondary",
+        "displayName": "Cinza Frio (texto)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "cold-bg": {
+        "role": "secondary",
+        "displayName": "Cinza Frio (fundo)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "pos": {
+        "role": "tertiary",
+        "displayName": "Verde Ganho",
+        "tonalRamp": [
+          "#001101",
+          "#00310f",
+          "#005524",
+          "#007c3b",
+          "#3e9f60",
+          "#79c18e",
+          "#abe0b8",
+          "#d3fadc"
+        ]
+      },
+      "pos-fg": {
+        "role": "tertiary",
+        "displayName": "Verde Ganho (texto)",
+        "tonalRamp": [
+          "#001003",
+          "#032f16",
+          "#14522d",
+          "#287847",
+          "#549b6b",
+          "#86bd96",
+          "#b4ddbe",
+          "#d9f8e1"
+        ]
+      },
+      "pos-bg": {
+        "role": "tertiary",
+        "displayName": "Verde Ganho (fundo)",
+        "tonalRamp": [
+          "#090c0a",
+          "#222825",
+          "#3f4743",
+          "#5e6963",
+          "#818c86",
+          "#a7b0ab",
+          "#ccd3cf",
+          "#ebf0ed"
+        ]
+      },
+      "pos-border": {
+        "role": "tertiary",
+        "displayName": "Borda Ganho",
+        "tonalRamp": [
+          "#090c0a",
+          "#222825",
+          "#3f4743",
+          "#5e6963",
+          "#818c86",
+          "#a7b0ab",
+          "#ccd3cf",
+          "#ebf0ed"
+        ]
+      },
+      "neg": {
+        "role": "tertiary",
+        "displayName": "Coral Perda",
+        "tonalRamp": [
+          "#220000",
+          "#4f0009",
+          "#81101c",
+          "#b72530",
+          "#dd5657",
+          "#f78a86",
+          "#ffb7b2",
+          "#ffdcd7"
+        ]
+      },
+      "neg-fg": {
+        "role": "tertiary",
+        "displayName": "Coral Perda (texto)",
+        "tonalRamp": [
+          "#210000",
+          "#4d060a",
+          "#7d1a1d",
+          "#b22f32",
+          "#d75c58",
+          "#f28e87",
+          "#ffbab3",
+          "#ffded8"
+        ]
+      },
+      "need-bg": {
+        "role": "tertiary",
+        "displayName": "Laranja Dor (fundo)",
+        "tonalRamp": [
+          "#0d0a09",
+          "#2a2523",
+          "#4a4340",
+          "#6d645f",
+          "#908782",
+          "#b4aca8",
+          "#d6cfcc",
+          "#f2edeb"
+        ]
+      },
+      "need-fg": {
+        "role": "tertiary",
+        "displayName": "Laranja Dor (texto)",
+        "tonalRamp": [
+          "#1d0200",
+          "#461400",
+          "#732b0a",
+          "#a4451b",
+          "#c86c48",
+          "#e5987b",
+          "#fdc1ab",
+          "#ffe3d2"
+        ]
+      },
+      "whatsapp": {
+        "role": "tertiary",
+        "displayName": "Verde WhatsApp",
+        "tonalRamp": [
+          "#001102",
+          "#003111",
+          "#005427",
+          "#0b7a3f",
+          "#479e64",
+          "#7ec090",
+          "#aedfba",
+          "#d5f9de"
+        ]
+      },
+      "whatsapp-hover": {
+        "role": "tertiary",
+        "displayName": "Verde WhatsApp Profundo",
+        "tonalRamp": [
+          "#001003",
+          "#003014",
+          "#0e532a",
+          "#217943",
+          "#509c67",
+          "#84be93",
+          "#b2debc",
+          "#d8f8df"
+        ]
+      },
+      "google-on": {
+        "role": "tertiary",
+        "displayName": "Verde Conectado",
+        "tonalRamp": [
+          "#00140a",
+          "#003a1d",
+          "#006133",
+          "#008a4b",
+          "#2fb567",
+          "#3ccf7a",
+          "#9fe8bb",
+          "#dbf8e6"
+        ]
+      },
+      "google-on-halo": {
+        "role": "tertiary",
+        "displayName": "Halo Conectado",
+        "tonalRamp": [
+          "#00140a",
+          "#003a1d",
+          "#006133",
+          "#008a4b",
+          "#2fb567",
+          "#3ccf7a",
+          "#9fe8bb",
+          "#dbf8e6"
+        ]
+      },
+      "knob-shadow": {
+        "role": "neutral",
+        "displayName": "Sombra da Bolinha",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "score-display": {
+        "displayName": "Score Display",
+        "purpose": "Número da nota no painel do lead; único momento de display."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Título do estado vazio inicial."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Título de página, nome do lead no painel, título de estado vazio."
+      },
+      "title-md": {
+        "displayName": "Title Md",
+        "purpose": "Nome da marca no trilho (700) e título da barra de capacidade da Fila."
+      },
+      "title-sm": {
+        "displayName": "Title Sm",
+        "purpose": "Cabeçalhos de caixa em Configurações, linha de temperatura do scorecard."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Controles, células da tabela, botões, navegação."
+      },
+      "body-sm": {
+        "displayName": "Body Sm",
+        "purpose": "Ledger, achados, chave-valor, avisos, toasts."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Metadados, contagens, status, pontos do ledger."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Rótulos de campo, cabeçalhos de coluna, títulos de grupo de filtro, chips."
+      },
+      "label-xs": {
+        "displayName": "Label Xs",
+        "purpose": "Badge de navegação, títulos de grupo do seletor de segmentos."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Iniciais de avatar e badge de tier; nunca texto corrido."
+      },
+      "micro-sm": {
+        "displayName": "Micro Sm",
+        "purpose": "Inicial do avatar pequeno de 20 px."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-sm",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.06)",
+        "purpose": "Repouso: botões, card do pipeline, segmento ativo (com anel de 1 px)."
+      },
+      {
+        "name": "shadow-md",
+        "value": "0 4px 12px -2px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06)",
+        "purpose": "Elevado: hover do card do pipeline, legenda do mapa."
+      },
+      {
+        "name": "shadow-lg",
+        "value": "0 16px 40px -12px rgba(0, 0, 0, 0.24), 0 4px 10px -4px rgba(0, 0, 0, 0.08)",
+        "purpose": "Flutuante: popovers, toasts, painel do lead em sobreposição."
+      },
+      {
+        "name": "shadow-primary",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+        "purpose": "Botão primário preto."
+      },
+      {
+        "name": "focus-field",
+        "value": "0 0 0 3px rgba(10, 10, 10, 0.1)",
+        "purpose": "Foco de campos, com borda preta."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid #0a0a0a; outline-offset: 2px",
+        "purpose": "Foco de teclado global (:focus-visible); branco dentro do trilho."
+      },
+      {
+        "name": "rail-active",
+        "value": "inset 0 0 0 1px #2e2e2e",
+        "purpose": "Contorno interno do item atual no trilho preto."
+      },
+      {
+        "name": "switch-knob",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.2)",
+        "purpose": "Bolinha branca do toggle."
+      },
+      {
+        "name": "google-on-halo",
+        "value": "0 0 0 3px rgba(60, 207, 122, 0.18)",
+        "purpose": "Halo do ponto de Google conectado no trilho."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Curva única para entradas, pressão, painel, toggles e toasts."
+      },
+      {
+        "name": "duration-hover",
+        "value": "100–120ms ease",
+        "purpose": "Cores de hover em linhas, botões, navegação e campos."
+      },
+      {
+        "name": "duration-press",
+        "value": "140ms",
+        "purpose": "Botão cede a scale(0.97)."
+      },
+      {
+        "name": "duration-popover",
+        "value": "160ms",
+        "purpose": "Popover entra de scale(0.96) translateY(-2px) a partir do gatilho."
+      },
+      {
+        "name": "duration-toggle",
+        "value": "180ms",
+        "purpose": "Bolinha do switch."
+      },
+      {
+        "name": "duration-panel",
+        "value": "220ms",
+        "purpose": "Painel do lead: translateX quando sobreposto; fade + 12 px quando encaixado."
+      },
+      {
+        "name": "duration-toast",
+        "value": "200ms opacity / 240ms transform",
+        "purpose": "Toast sobe 8 px ao entrar."
+      },
+      {
+        "name": "duration-row-in",
+        "value": "360ms",
+        "purpose": "Linha nova durante a busca ao vivo: fade + 3 px."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animations 1ms; transitions só de cor/opacidade",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "panel-compact",
+        "value": "1680px",
+        "purpose": "Com painel aberto, filtros viram o botão Filtros."
+      },
+      {
+        "name": "md",
+        "value": "1180px",
+        "purpose": "Filtros 220 px, painel 400 px, busca em 3 colunas."
+      },
+      {
+        "name": "sm",
+        "value": "900px",
+        "purpose": "Trilho vira barra horizontal preta, filtros ocultos, painel em tela cheia."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão primário",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Única ação primária de uma região (Buscar leads, Auditar); preta.",
+      "html": "<button class=\"ds-btn ds-btn-primary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg>Buscar leads</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:32px;padding:0 12px;border-radius:var(--radius,7px);border:1px solid var(--border-strong,#d6d6d6);background:var(--bg,#fff);color:var(--text,#0a0a0a);font:550 13.5px/1 'Inter Variable',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;box-shadow:var(--shadow-sm,0 1px 2px rgba(0,0,0,.06));transition:background-color 120ms ease,border-color 120ms ease,transform 140ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid var(--accent,#0a0a0a);outline-offset:2px}.ds-btn-primary{background:var(--accent,#0a0a0a);border-color:var(--accent,#0a0a0a);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.1)}.ds-btn-primary:hover{background:var(--accent-hover,#2b2b2b);border-color:var(--accent-hover,#2b2b2b)}"
+    },
+    {
+      "name": "Botão secundário",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ações comuns, exemplos de busca, CSV.",
+      "html": "<button class=\"ds-btn\">Tentar de novo</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:32px;padding:0 12px;border-radius:var(--radius,7px);border:1px solid var(--border-strong,#d6d6d6);background:var(--bg,#fff);color:var(--text,#0a0a0a);font:550 13.5px/1 'Inter Variable',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;box-shadow:var(--shadow-sm,0 1px 2px rgba(0,0,0,.06));transition:background-color 120ms ease,border-color 120ms ease,transform 140ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid var(--accent,#0a0a0a);outline-offset:2px}.ds-btn:hover{background:var(--bg-hover,#f6f6f6);border-color:#c4c4c4}"
+    },
+    {
+      "name": "Botão ghost (ícone)",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Navegação e fechamento do painel, ações de seção.",
+      "html": "<button class=\"ds-btn ds-btn-ghost ds-btn-icon\" aria-label=\"Fechar painel\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/></svg></button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:32px;padding:0 12px;border-radius:var(--radius,7px);border:1px solid var(--border-strong,#d6d6d6);background:var(--bg,#fff);color:var(--text,#0a0a0a);font:550 13.5px/1 'Inter Variable',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;box-shadow:var(--shadow-sm,0 1px 2px rgba(0,0,0,.06));transition:background-color 120ms ease,border-color 120ms ease,transform 140ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid var(--accent,#0a0a0a);outline-offset:2px}.ds-btn-ghost{border-color:transparent;background:transparent;box-shadow:none;color:var(--text-2,#565656)}.ds-btn-ghost:hover{background:var(--bg-muted,#f2f2f2);color:var(--text,#0a0a0a)}.ds-btn-icon{width:32px;padding:0}"
+    },
+    {
+      "name": "Botão WhatsApp",
+      "kind": "button",
+      "refersTo": "button-whatsapp",
+      "description": "Ação primária do painel do lead; exclusivo do canal WhatsApp.",
+      "html": "<a class=\"ds-btn ds-btn-wa\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>Abrir no WhatsApp</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:32px;padding:0 12px;border-radius:var(--radius,7px);border:1px solid var(--border-strong,#d6d6d6);background:var(--bg,#fff);color:var(--text,#0a0a0a);font:550 13.5px/1 'Inter Variable',system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-decoration:none;box-shadow:var(--shadow-sm,0 1px 2px rgba(0,0,0,.06));transition:background-color 120ms ease,border-color 120ms ease,transform 140ms cubic-bezier(.23,1,.32,1)}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:2px solid var(--accent,#0a0a0a);outline-offset:2px}.ds-btn-wa{background:#1c8d4c;border-color:#1c8d4c;color:#fff;box-shadow:0 1px 2px rgba(28,141,76,.3)}.ds-btn-wa:hover{background:#167a40;border-color:#167a40}"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de texto com rótulo acima; foco preto.",
+      "html": "<label class=\"ds-field\"><span>Cidade</span><input class=\"ds-input\" placeholder=\"Campinas, SP\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:5px;font-family:'Inter Variable',system-ui,sans-serif}.ds-field>span{font-size:12px;font-weight:550;color:var(--text-2,#565656)}.ds-input{height:32px;padding:0 10px;border-radius:var(--radius,7px);border:1px solid var(--border-strong,#d6d6d6);background:#fff;font:400 13.5px 'Inter Variable',system-ui,sans-serif;color:#0a0a0a;caret-color:#0a0a0a;transition:border-color 120ms ease,box-shadow 120ms ease}.ds-input::placeholder{color:var(--text-3,#6b6b6b)}.ds-input:hover{border-color:#bdbdbd}.ds-input:focus{outline:none;border-color:#0a0a0a;box-shadow:0 0 0 3px rgba(10,10,10,.1)}"
+    },
+    {
+      "name": "Chip de nota",
+      "kind": "chip",
+      "refersTo": "score-quente",
+      "description": "Nota 0–100 colorida pela temperatura, na tabela e na fila.",
+      "html": "<span class=\"ds-score ds-q\">77</span> <span class=\"ds-score ds-m\">65</span> <span class=\"ds-score ds-f\">32</span>",
+      "css": ".ds-score{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:22px;padding:0 7px;border-radius:6px;font:650 12.5px 'Inter Variable',system-ui,sans-serif;font-variant-numeric:tabular-nums}.ds-q{background:#fdeeee;color:#b92b30}.ds-m{background:#fff4e0;color:#925000}.ds-f{background:#f2f2f2;color:#525252}"
+    },
+    {
+      "name": "Chips de dor",
+      "kind": "chip",
+      "refersTo": "chip-need",
+      "description": "Dor detectada do lead: explorável, quebrado, ok.",
+      "html": "<span class=\"ds-chip ds-need\">Sem site</span> <span class=\"ds-chip ds-broken\">Site fora do ar</span> <span class=\"ds-chip ds-ok\">Site ok</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;font:550 12px 'Inter Variable',system-ui,sans-serif;background:#f2f2f2;color:#565656;white-space:nowrap}.ds-need{background:#fff3ed;color:#a6400f}.ds-broken{background:#fdeeee;color:#b92b30}.ds-ok{background:#e8f6ee;color:#16723e}"
+    },
+    {
+      "name": "Etapas do pipeline",
+      "kind": "custom",
+      "refersTo": "chip",
+      "description": "Marcador monocromático: vazado (contatado/respondeu), cheio (reunião/proposta); cor só no desfecho.",
+      "html": "<div class=\"ds-stages\"><span class=\"ds-st\" data-s=\"novo\"><i></i>Novo</span><span class=\"ds-st\" data-s=\"contatado\"><i></i>Contatado</span><span class=\"ds-st\" data-s=\"reuniao\"><i></i>Reunião</span><span class=\"ds-st\" data-s=\"ganho\"><i></i>Ganho</span><span class=\"ds-st\" data-s=\"perdido\"><i></i>Perdido</span></div>",
+      "css": ".ds-stages{display:flex;gap:16px;font-family:'Inter Variable',system-ui,sans-serif}.ds-st{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:550;color:#565656}.ds-st i{width:6px;height:6px;border-radius:2px;background:#a3a3a3}.ds-st[data-s=contatado] i{background:transparent;box-shadow:inset 0 0 0 1.5px #0a0a0a}.ds-st[data-s=reuniao] i{background:#0a0a0a}.ds-st[data-s=ganho] i{background:#1f9d55}.ds-st[data-s=perdido] i{background:#e5484d}"
+    },
+    {
+      "name": "Por que essa nota",
+      "kind": "custom",
+      "refersTo": "lead-panel",
+      "description": "Ledger de barras divergentes cuja soma é exatamente a nota.",
+      "html": "<div class=\"ds-why\"><div class=\"ds-row\"><span>Link do site leva só para o Linktree</span><span class=\"ds-tr\"><i class=\"p\" style=\"width:50%\"></i></span><b class=\"p\">+34</b></div><div class=\"ds-row\"><span>Nicho de ticket alto</span><span class=\"ds-tr\"><i class=\"p\" style=\"width:15%\"></i></span><b class=\"p\">+10</b></div><div class=\"ds-row\"><span>Rede/franquia</span><span class=\"ds-tr\"><i class=\"n\" style=\"width:12%\"></i></span><b class=\"n\">−8</b></div><div class=\"ds-tot\"><span>Ponto de partida <span style=\"color:#565656\">10</span> + sinais</span><span>46</span></div></div>",
+      "css": ".ds-why{font:400 13px/1.45 'Inter Variable',system-ui,sans-serif;color:#0a0a0a;width:400px}.ds-row{display:grid;grid-template-columns:1fr 96px 34px;gap:10px;align-items:center;min-height:26px}.ds-tr{position:relative;height:8px}.ds-tr::before{content:'';position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:#d6d6d6}.ds-tr i{position:absolute;top:0;height:8px;border-radius:2px}.ds-tr i.p{left:50%;background:#1f9d55}.ds-tr i.n{right:50%;background:#e5484d}.ds-row b{text-align:right;font-weight:650;font-size:12.5px;font-variant-numeric:tabular-nums}.ds-row b.p{color:#16723e}.ds-row b.n{color:#b92b30}.ds-tot{display:grid;grid-template-columns:1fr 34px;gap:10px;border-top:1px solid #e8e8e8;margin-top:6px;padding-top:8px;font-weight:650}.ds-tot span:last-child{text-align:right;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Trilho com marca",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Sidebar preta com o S branco da Synch; item atual em Trilho Ativo, badge invertido.",
+      "html": "<nav class=\"ds-rail\"><a class=\"ds-brand\" href=\"#\" aria-label=\"Synch Search — início\"><svg class=\"ds-mark\" viewBox=\"0 0 32 29\" fill=\"#fff\" aria-hidden=\"true\"><path d=\"M7,1 H31 L28,6 H8.6 Q6.2,6 6.2,8.4 Q6.2,10 7.3,11.2 L13.8,19 H6.6 L1.9,13.6 Q1,12.6 1,11.2 V7 A6,6 0 0 1 7,1 Z\"/><path d=\"M25,28 H1 L4.2,23 H22.6 Q24.6,23 24.6,21 V19.2 Q24.6,17.1 22.5,17.1 H17.4 L16,14.9 H27.6 A2.4,2.4 0 0 1 30,17.3 V23 A5,5 0 0 1 25,28 Z\"/><path d=\"M10.4,8.9 H27.6 L24.6,10.7 H11.5 Z\"/><path d=\"M13.8,12.1 H29 L26.1,13.8 H14.9 Z\"/></svg><span>Synch Search<small>Prospecção de sites</small></span></a><a class=\"ds-nav-item\" aria-current=\"page\" href=\"#\">Prospectar</a><a class=\"ds-nav-item\" href=\"#\">Fila de hoje<span class=\"ds-badge\">23</span></a><a class=\"ds-nav-item\" href=\"#\">Pipeline</a></nav>",
+      "css": ".ds-rail{background:#0a0a0a;border-right:1px solid #262626;padding:14px 10px 12px;width:232px;display:flex;flex-direction:column;gap:2px;font-family:'Inter Variable',system-ui,sans-serif}.ds-brand{display:flex;align-items:center;gap:11px;padding:6px 8px 18px;color:#fff;text-decoration:none;font-weight:700;font-size:15px;letter-spacing:-.01em}.ds-mark{width:30px;height:auto;flex:none}.ds-brand small{display:block;font-weight:500;font-size:12px;color:#a3a3a3;letter-spacing:0}.ds-nav-item{display:flex;align-items:center;height:32px;padding:0 10px;border-radius:5px;color:#a3a3a3;text-decoration:none;font-weight:500;font-size:13.5px;transition:background-color 120ms ease,color 120ms ease}.ds-nav-item:hover{background:#1a1a1a;color:#fff}.ds-nav-item[aria-current=page]{background:#222;color:#fff;box-shadow:inset 0 0 0 1px #2e2e2e}.ds-nav-item:focus-visible,.ds-brand:focus-visible{outline:2px solid #fff;outline-offset:2px}.ds-badge{margin-left:auto;font-size:11.5px;font-weight:600;color:#d4d4d4;background:#262626;padding:1px 6px;border-radius:10px;font-variant-numeric:tabular-nums}.ds-nav-item[aria-current=page] .ds-badge{background:#fff;color:#0a0a0a}"
+    },
+    {
+      "name": "Aviso",
+      "kind": "custom",
+      "refersTo": "notice",
+      "description": "Faixa de largura total sob a barra de busca: informativo neutro; variante de erro em coral.",
+      "html": "<div class=\"ds-notice\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 16v-4\"/><path d=\"M12 8h.01\"/></svg><span>Só OpenStreetMap: poucos comércios. <a href=\"#\">Conecte o Google Places</a>.</span></div><div class=\"ds-notice ds-err\" role=\"alert\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\"/><path d=\"M12 9v4\"/><path d=\"M12 17h.01\"/></svg>Overpass não respondeu. Tente de novo em alguns minutos.</div>",
+      "css": ".ds-notice{display:flex;gap:10px;align-items:flex-start;padding:10px 20px;font:400 13px 'Inter Variable',system-ui,sans-serif;border-bottom:1px solid #e8e8e8;background:#fafafa;color:#3d3d3d}.ds-notice svg{flex:none;margin-top:1px}.ds-notice a{color:#0a0a0a;text-underline-offset:2px;text-decoration-thickness:1px}.ds-err{background:#fdeeee;color:#b92b30}"
+    }
+  ],
+  "narrative": {
+    "northStar": "A Mesa de Prospecção",
+    "overview": "Synch Search é uma ferramenta de trabalho, não uma vitrine. O sistema segue o padrão da categoria de CRM e prospecção (filtros à esquerda, tabela densa no centro, painel do lead à direita) executado no nível de acabamento de Attio e Apollo.io, vestido com a identidade da Synch: preto e branco. Um trilho lateral preto carrega a marca em branco; a área de trabalho é branca, com cinzas neutros puros, e a ação é preta. Cor aparece só onde carrega significado: temperatura do lead, pontos que somam ou subtraem, o canal WhatsApp, ganho e perdido. A marca vive no contraste e na precisão dos detalhes (números tabulares, linhas de 1 px, raios contidos, sombras que mal se notam), não em ornamento.\n\nA densidade é alta e deliberada: linhas de tabela de 48 px, controles de 32 px, texto de interface em 13,5 px. O primeiro dado da tela é sempre o lead que mais vale uma ligação agora; como quase tudo é preto, branco e cinza, a cor quente/morno/frio salta e a ordem é lida em um relance. Toda nota tem sua conta visível no ledger \"Por que essa nota\", com barras divergentes que somam exatamente a nota.\n\nO movimento é curto e funcional: o painel entra em 220 ms, popovers escalam a partir do gatilho, botões cedem a 0,97 ao serem pressionados, linhas novas só aparecem com fade durante a busca ao vivo. Nada anima em navegação por teclado e tudo colapsa com `prefers-reduced-motion`.",
+    "keyCharacteristics": [
+      "Preto e branco como marca: trilho lateral preto com o \"S\" da Synch em branco, conteúdo branco, ação preta.",
+      "Cinzas neutros puros, sem matiz; cor reservada para significado (temperatura, +/−, WhatsApp, ganho/perdido, dor auditada).",
+      "Inter Variable auto-hospedada, pesos intermediários (550, 650) e números tabulares em toda nota, contagem e valor.",
+      "Estrutura feita de bordas de 1 px, não de caixas sombreadas; sombras em preto neutro de baixa opacidade.",
+      "Ícones Lucide em traço 1,75, 13–17 px, sempre acompanhando texto ou com rótulo acessível.",
+      "Movimento com uma curva só, ease-out forte, entre 120 e 240 ms."
+    ],
+    "rules": [
+      {
+        "name": "A Regra do Preto e Branco",
+        "body": "A marca Synch é preto e branco. Superfícies, texto, ação, seleção, foco, links e avatares vivem na escala neutra; nenhum acento com matiz substitui o preto.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra da Cor Significante",
+        "body": "Cor só aparece onde carrega significado: temperatura (quente/morno/frio), pontos +/− do ledger, o canal WhatsApp, ganho/perdido, dor e resultado de auditoria, erro. Nunca como decoração, nunca como cor de seção, nunca como cor de marca.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Verde do Canal",
+        "body": "O verde do WhatsApp pertence ao canal WhatsApp. Sucesso e contribuição positiva usam `pos`, não `whatsapp`.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Número Tabular",
+        "body": "Todo número que se compara com outro (nota, contagem, avaliações, R$, km, pontos) usa `tabular-nums`. Uma coluna de notas desalinhada é um defeito.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra do Peso, não do Tamanho",
+        "body": "Para destacar, suba o peso (550 → 650) ou escureça o tom (text-2 → text) antes de aumentar o tamanho. Nada de texto em caixa alta com espaçamento largo.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra do Trilho Preto",
+        "body": "A sidebar é a única superfície escura e é onde a marca mora: trilho preto, logo branca no topo. O conteúdo de trabalho é sempre branco; nenhuma outra região, cabeçalho ou painel fica preto.",
+        "section": "layout"
+      },
+      {
+        "name": "A Regra do Painel Encaixado",
+        "body": "Quando o painel do lead vive como terceira coluna, ele não tem sombra: é separado por uma borda. A sombra flutuante só aparece quando ele se sobrepõe ao conteúdo.",
+        "section": "elevation"
+      },
+      {
+        "name": "A Regra da Etapa Monocromática",
+        "body": "As etapas intermediárias do funil são preto: vazado enquanto a conversa começa, cheio quando há reunião ou proposta. Cor fica reservada para o resultado (ganho, perdido).",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** usar preto (#0a0a0a) para ação, seleção, foco e links; um botão primário preto por região.",
+      "**Do** manter a marca no trilho preto: o \"S\" branco da Synch no topo da sidebar e no favicon.",
+      "**Do** usar cor só onde carrega significado: temperatura, +/− do ledger, WhatsApp, ganho/perdido, dor e auditoria, erro.",
+      "**Do** codificar temperatura sempre com o trio sinal/`-fg`/`-bg` da mesma família, e manter o mesmo trio em chip, nota grande, ponto, medidor e marcador do mapa.",
+      "**Do** marcar etapas intermediárias do pipeline em preto (anel vazado para contatado/respondeu, cheio para reunião/proposta) e reservar cor para o desfecho.",
+      "**Do** mostrar a conta de toda nota com o ledger de barras divergentes, total somando exatamente.",
+      "**Do** usar `tabular-nums` em todo número comparável.",
+      "**Do** separar regiões com bordas de 1 px (#e8e8e8) e reservar sombra para o que é pressionável ou flutua.",
+      "**Do** usar ícones Lucide com `strokeWidth` 1,75, 13–17 px, acompanhados de texto ou com `aria-label`.",
+      "**Do** animar com `cubic-bezier(0.23, 1, 0.32, 1)` entre 120 e 240 ms, e respeitar `prefers-reduced-motion`.",
+      "**Do** manter controles em 32 px (28 px no tamanho pequeno) e linhas de tabela em 48 px."
+    ],
+    "donts": [
+      "**Don't** introduzir uma cor de acento ou de marca com matiz; ação, seleção, foco e links são preto.",
+      "**Don't** tingir os neutros (cinza-frio, azulado ou quente); bordas, fundos e textos cinza são neutros puros.",
+      "**Don't** recolorir, contornar ou pôr a logo sobre fundo claro; ela é branca sobre preto.",
+      "**Don't** colorir avatares para diferenciar vendedores; a diferença está nas iniciais.",
+      "**Don't** colocar cartões de métricas no topo das telas de trabalho; o primeiro dado é o lead.",
+      "**Don't** usar coral, âmbar ou verde como decoração ou cor de seção.",
+      "**Don't** usar o verde do WhatsApp para sucesso genérico.",
+      "**Don't** escrever rótulos em caixa alta com espaçamento largo nem pôr sobretítulos acima de títulos.",
+      "**Don't** dar sombra ao painel quando ele está encaixado como coluna.",
+      "**Don't** exibir taxas de conversão ou probabilidades que o modelo ainda não calibrou com resultados reais."
+    ]
+  }
+}

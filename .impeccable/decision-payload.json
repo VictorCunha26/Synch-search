@@ -1,0 +1,116 @@
+{
+  "title": "Escolha o mundo visual do Synch Search",
+  "question": "A rolagem sorteou a Plaquinha de Feira. Fique com ela, pegue uma alternativa ou role de novo.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "Plaquinha de Feira",
+      "kicker": "THE ROLL",
+      "lineage": "Plaquinhas de cartolina fluorescente escritas a pincel atômico na feira livre",
+      "thesis": "Cada lead ganha a plaquinha da feira: a nota de propensão escrita como preço, a dor como 'promoção'.",
+      "palette": ["#1C3E9C", "#FF3D87", "#F1EE3A", "#FAFAF8", "#141414"],
+      "materials": ["cartolina fluorescente", "pincel atômico", "lona azul da barraca"],
+      "viewport": "Trilho lateral azul-lona com a navegação; busca no topo; fila ranqueada onde cada linha carrega sua plaquinha (rosa = quente, amarela = morno, branca = frio); painel do lead à direita com 'a conta' dos sinais somada como no saco de pão.",
+      "risk": "Se as plaquinhas forem usadas como enfeite fora da nota, a tela vira fantasia de feira em vez de ferramenta.",
+      "raised": [
+        {"from": "challenger-jcard", "raise": "A fila de hoje cabe no dia do vendedor: dimensionada pela capacidade de abordagens, o excedente vai para amanhã."},
+        {"from": "challenger-crouwel", "raise": "As colunas da tabela são a composição: grade visível em fio fino e números tabulares alinhados."},
+        {"from": "challenger-saville", "raise": "Nada é rotulado duas vezes: cada fato do lead aparece uma única vez por linha."},
+        {"from": "challenger-annual", "raise": "Uma só família (Barlow e Barlow Condensed) carrega a interface e a plaquinha."},
+        {"from": "challenger-atlas", "raise": "No mapa, o tamanho do pino segue uma escala fixa de 4 degraus pela nota."},
+        {"from": "challenger-ikeda", "raise": "Ao abrir um lead, as outras linhas recuam para que a plaquinha selecionada leia sozinha."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html",
+      "comp": ".impeccable/mocks/decision/assigned.png"
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "label": "Páginas Amarelas",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Lista telefônica e Páginas Amarelas, o diretório de comércios antes da web",
+      "thesis": "O guia de quem ainda não está online: leads compostos no ritmo de colunas da lista telefônica.",
+      "palette": ["#FFD400", "#111111", "#FFFFFF", "#D7261E"],
+      "materials": ["papel-jornal", "anúncio em caixa", "cabeçalho corrido"],
+      "viewport": "Barra superior amarela com busca; colunas densas de leads agrupadas por segmento e bairro com cabeçalhos corridos; leads quentes ganham o tratamento de anúncio em caixa.",
+      "risk": "Familiar: amarelo e preto de diretório é a metáfora mais óbvia para um buscador de empresas.",
+      "html": ".impeccable/mocks/decision/model-pick.html",
+      "comp": ".impeccable/mocks/decision/model-pick.png"
+    },
+    {
+      "id": "challenger-jcard", "kind": "challenger", "catalogId": "vernacular-ephemera-cassette-j-card",
+      "label": "Capa de fita cassete", "verdict": "declined",
+      "lineage": "j-card escrita à mão", "thesis": "A fila como lado A e lado B de uma fita.",
+      "palette": ["#1E3A8A", "#FFFFFF", "#9CA3AF", "#C8102E"], "materials": ["caneta esferográfica", "encarte pautado"],
+      "viewport": "Fila dividida em dois lados com tempo de execução.",
+      "case": "O time comercial não se reconhece em fita cassete e a escrita à mão atrapalha a leitura de dados.",
+      "risk": "Nostalgia sem relação com prospecção.",
+      "kept": "Disciplina de capacidade: a fila de hoje cabe no dia do vendedor."
+    },
+    {
+      "id": "challenger-crouwel", "kind": "challenger", "catalogId": "crouwel-grid-specimen",
+      "label": "Grade de Crouwel", "verdict": "declined",
+      "lineage": "espécime tipográfico em grade", "thesis": "A grade de construção visível como interface.",
+      "palette": ["#FFFFFF", "#1A1A1A", "#9DB7E8", "#E63312"], "materials": ["papel milimetrado", "letras modulares"],
+      "viewport": "Letreiros monumentais construídos em células.",
+      "case": "Pôster de tipografia não comunica prospecção; perde nos dois eixos.",
+      "risk": "Vira peça de portfólio, não ferramenta.",
+      "kept": "As colunas da tabela como composição, com grade visível."
+    },
+    {
+      "id": "challenger-saville", "kind": "challenger", "catalogId": "brand-identity-canon-saville-catalog-sleeve",
+      "label": "Catálogo Factory", "verdict": "declined",
+      "lineage": "capas de disco da Factory Records", "thesis": "Tudo vira item numerado de catálogo.",
+      "palette": ["#0B0B0B", "#FFFFFF", "#E4002B", "#00A3E0"], "materials": ["preto fosco", "códigos de cor"],
+      "viewport": "Índice preto com códigos no lugar de nomes.",
+      "case": "Rótulos codificados escondem o nome do comércio, que é o dado principal.",
+      "risk": "Obscuro demais para uso diário.",
+      "kept": "Nada rotulado duas vezes."
+    },
+    {
+      "id": "challenger-annual", "kind": "challenger", "catalogId": "design-annual-s-plate-section",
+      "label": "Anuário de design", "verdict": "declined",
+      "lineage": "pranchas de anuário com marcas de registro", "thesis": "Cada lead como prancha impressa.",
+      "palette": ["#F5F4F6", "#16181A", "#C9C7C4", "#DCDDF3"], "materials": ["papel não revestido", "fios finos", "carimbo"],
+      "viewport": "Folha contínua com cruzes de registro.",
+      "case": "Estética editorial genérica, sem raiz no mundo do comércio local.",
+      "risk": "Parece com tudo que a IA já entrega.",
+      "kept": "Uma única família tipográfica para interface e destaque."
+    },
+    {
+      "id": "challenger-atlas", "kind": "challenger", "catalogId": "notation-diagram-systems-star-atlas",
+      "label": "Atlas estelar", "verdict": "declined",
+      "lineage": "cartas celestes", "thesis": "Leads como estrelas: magnitude é a nota.",
+      "palette": ["#0E1A3A", "#F5F5F0", "#E8A23A", "#C2362F"], "materials": ["carta náutica", "pontos por magnitude"],
+      "viewport": "Mapa escuro com leads como pontos de tamanhos diferentes.",
+      "case": "Bonito, mas o vendedor precisa ler nome e telefone, não constelações.",
+      "risk": "Escuro e contemplativo para uma tela de trabalho diurna.",
+      "kept": "No mapa, tamanho do pino em escala fixa pela nota."
+    },
+    {
+      "id": "challenger-ikeda", "kind": "challenger", "catalogId": "ikeda-datamatics",
+      "label": "Datamatics", "verdict": "declined",
+      "lineage": "instalações de Ryoji Ikeda", "thesis": "Campo de dados em preto e branco puro.",
+      "palette": ["#000000", "#FFFFFF"], "materials": ["código de barras", "monoespaçada"],
+      "viewport": "Colunas de barras e números estroboscópicos.",
+      "case": "Sem cor para estados (quente/morno/frio) e frio para o público.",
+      "risk": "Agressivo e ilegível no uso diário.",
+      "kept": "Ao selecionar, o resto recua e o foco lê sozinho."
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": false },
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "O padrão da categoria",
+    "thesis": "O que ferramentas de prospecção (Apollo, Pipedrive) entregam, executado com cuidado.",
+    "palette": ["#FFFFFF", "#0F172A", "#2563EB", "#F1F5F9"],
+    "materials": ["grade limpa", "cartões de métricas", "tabela"],
+    "viewport": "Menu lateral cinza, cartões de métricas no topo, tabela de leads e painel de detalhe.",
+    "risk": "Indistinguível da concorrência por definição.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#F8FAFC;color:#0F172A;display:grid;grid-template-columns:240px 1fr 380px}
+.side{background:#F1F5F9;border-right:1px solid #E2E8F0;padding:20px 14px;display:flex;flex-direction:column;gap:2px}
+.logo{font-weight:700;font-size:18px;padding:4px 10px 20px}
+.nav{padding:9px 10px;border-radius:6px;font-size:14px;color:#475569}
+.nav.on{background:#fff;color:#2563EB;font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08)}
+.main{padding:24px;display:flex;flex-direction:column;gap:18px}
+.bar{display:flex;gap:10px}
+.in{flex:1;background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;font-size:14px;color:#334155}
+.btn{background:#2563EB;color:#fff;border-radius:8px;padding:10px 18px;font-weight:600;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:14px}
+.kpi small{font-size:12px;color:#64748B}.kpi b{display:block;font-size:26px;margin-top:4px}
+table{width:100%;background:#fff;border:1px solid #E2E8F0;border-radius:10px;border-collapse:separate;border-spacing:0;font-size:14px}
+th{text-align:left;font-size:12px;color:#64748B;font-weight:600;padding:10px 12px;border-bottom:1px solid #E2E8F0}
+td{padding:12px;border-bottom:1px solid #F1F5F9}
+.sc{display:inline-block;min-width:38px;text-align:center;border-radius:999px;padding:3px 8px;font-weight:700;font-size:13px}
+.h{background:#DCFCE7;color:#166534}.w{background:#FEF9C3;color:#854D0E}.c{background:#F1F5F9;color:#475569}
+.det{background:#fff;border-left:1px solid #E2E8F0;padding:24px;display:flex;flex-direction:column;gap:14px}
+.det h2{font-size:20px}
+.row{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;border-bottom:1px solid #F1F5F9}
+.msg{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;font-size:14px;line-height:1.5}
+</style></head><body>
+<aside class="side"><div class="logo">Synch Search</div>
+<div class="nav on">Prospectar</div><div class="nav">Pipeline</div><div class="nav">Mapa</div><div class="nav">Pontuação</div><div class="nav">Configurações</div></aside>
+<main class="main">
+<div class="bar"><div class="in">Dentistas, Estética, Fisioterapia</div><div class="in">Campinas, SP · 5 km</div><div class="btn">Buscar</div></div>
+<div class="kpis"><div class="kpi"><small>Encontrados</small><b>142</b></div><div class="kpi"><small>Sem site</small><b>61</b></div><div class="kpi"><small>Quentes</small><b>23</b></div><div class="kpi"><small>Contatados hoje</small><b>7</b></div></div>
+<table><tr><th>Score</th><th>Estabelecimento</th><th>Problema</th><th>Google</th><th>Status</th></tr>
+<tr><td><span class="sc h">91</span></td><td>Odonto Sorriso Cambuí</td><td>Site fora do ar</td><td>4,8 · 312</td><td>Novo</td></tr>
+<tr><td><span class="sc h">86</span></td><td>Studio Bella Estética</td><td>Só Instagram</td><td>4,9 · 187</td><td>Novo</td></tr>
+<tr><td><span class="sc h">82</span></td><td>FisioVida Barão Geraldo</td><td>Sem site</td><td>4,7 · 96</td><td>Contatado</td></tr>
+<tr><td><span class="sc w">68</span></td><td>Clínica Dra. Helena Prado</td><td>Sem HTTPS</td><td>4,5 · 64</td><td>Novo</td></tr>
+<tr><td><span class="sc w">61</span></td><td>Pilates Guanabara</td><td>Site desatualizado</td><td>4,6 · 41</td><td>Novo</td></tr>
+<tr><td><span class="sc c">34</span></td><td>OdontoCompany Castelo</td><td>Site ok</td><td>4,2 · 1.204</td><td>Ignorado</td></tr>
+</table></main>
+<aside class="det"><h2>Odonto Sorriso Cambuí</h2>
+<div class="row"><span>Site não responde</span><b>+24</b></div><div class="row"><span>312 avaliações</span><b>+18</b></div><div class="row"><span>Nicho de ticket alto</span><b>+14</b></div><div class="row"><span>WhatsApp</span><b>+9</b></div>
+<div class="msg">Oi, tudo bem? Vi que a Odonto Sorriso tem 4,8 estrelas com 312 avaliações, mas o site está fora do ar…</div>
+<div class="btn" style="text-align:center">Abrir no WhatsApp</div></aside>
+</body></html>

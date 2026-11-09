@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-06T15:45:29.687Z",
+        "reason": "Direction contract (canon, Attio/Apollo craft bar chosen by the user): Inter as the workhorse UI face on an Operate surface; not used as display"
+      }
+    ]
+  }
+}
