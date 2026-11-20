@@ -182,7 +182,7 @@ export default function Prospect() {
     <>
       <div className="page-head">
         <h1>Prospectar</h1>
-        <span className="sub">Encontre comércios que precisam de site, do mais quente ao mais frio.</span>
+        <span className="sub">Encontre empresas que a Synch pode ajudar com site, automação ou sistema, da mais quente à mais fria.</span>
       </div>
 
       <form className="searchbar" onSubmit={(e) => { e.preventDefault(); runSearch(); }}>
@@ -233,7 +233,7 @@ export default function Prospect() {
         <div className="page-body">
           <div className="onboard">
             <h2>Comece por uma cidade e um segmento</h2>
-            <p>Escolha acima ou teste uma destas buscas: o Synch Search visita o site de cada comércio e ordena a lista pela chance de fechar.</p>
+            <p>Escolha acima ou teste uma destas buscas: o Synch Search visita o site de cada empresa e ordena a lista pela chance de fechar.</p>
             <div className="examples">
               {EXAMPLES.map((ex) => (
                 <button key={ex.label} className="btn" onClick={() => { const f = { ...form, city: ex.city, niches: ex.niches, neighborhood: '' }; setForm(f); runSearch(f); }}>{ex.label}</button>

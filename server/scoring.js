@@ -2,8 +2,8 @@
 //
 // É uma regressão logística: z = viés + Σ peso·sinal, nota = 100·σ(z).
 // Os pesos iniciais são heurísticos (o "prior"), escolhidos a partir do que
-// costuma fechar venda de site para comércio local:
-//   1) NECESSIDADE  – não tem site, site quebrado, só rede social, site ruim;
+// costuma fechar venda de tecnologia (sites, automações e sistemas) para pequenas e médias empresas:
+//   1) NECESSIDADE  – não tem site, site quebrado, só rede social, site ruim, rotina que pede automação;
 //   2) CAPACIDADE   – movimento (avaliações), reputação, nicho de ticket alto;
 //   3) INTENÇÃO     – dono ativo no Google (fotos, horário), já investe em Instagram;
 //   4) ALCANCE      – tem celular/WhatsApp para a abordagem;
@@ -21,7 +21,9 @@ export const PRIOR = {
   p_aggregator: 1.5,
   p_dead_free: 1.9,
   p_broken: 2.0,
-  p_working: -1.6,
+  p_working: -0.5, // já tem site: ainda é cliente de automação e sistemas
+  ops_heavy: 0.5,
+  w_noWhats: 0.3,
   w_noHttps: 0.7,
   w_noMobile: 0.9,
   w_outdated: 0.5,
@@ -55,7 +57,7 @@ export const PRIOR = {
 };
 
 export const FEATURE_GROUPS = {
-  Necessidade: ['p_none', 'p_unverified_none', 'free_email', 'p_social', 'p_aggregator', 'p_dead_free', 'p_broken', 'p_working', 'w_noHttps', 'w_noMobile', 'w_outdated', 'w_oldTech', 'w_slow', 'w_freeBuilder'],
+  Necessidade: ['p_none', 'p_unverified_none', 'free_email', 'p_social', 'p_aggregator', 'p_dead_free', 'p_broken', 'p_working', 'ops_heavy', 'w_noWhats', 'w_noHttps', 'w_noMobile', 'w_outdated', 'w_oldTech', 'w_slow', 'w_freeBuilder'],
   Capacidade: ['reviews_log', 'few_reviews', 'huge_reviews', 'rating_c', 'tier_A', 'tier_C', 'price_high', 'porte_plus', 'capital_high', 'mei'],
   Intenção: ['photos_many', 'has_hours', 'insta_known', 'new_business', 'young_business'],
   Alcance: ['phone_mobile', 'phone_none', 'phone_shared'],
@@ -69,6 +71,8 @@ export const FEATURE_INFO = {
   p_dead_free: 'Site gratuito do Google desativado',
   p_broken: 'Site informado fora do ar',
   p_working: 'Já tem site funcionando',
+  ops_heavy: 'Rotina com agenda, pedidos ou orçamentos (automatizável)',
+  w_noWhats: 'Site sem atendimento por WhatsApp',
   w_noHttps: 'Site sem HTTPS',
   w_noMobile: 'Site não adaptado ao celular',
   w_outdated: 'Site desatualizado (3+ anos)',
@@ -136,6 +140,8 @@ export function extractFeatures(b) {
   f.p_broken = kind === 'broken' ? 1 : 0;
   f.p_working = kind === 'ok' || kind === 'weak' ? 1 : 0;
   const fl = a.flags || {};
+  f.ops_heavy = OPS_HEAVY.has(b.niche) ? 1 : 0;
+  f.w_noWhats = f.p_working && a.hasWhats === false ? 1 : 0;
   f.w_noHttps = f.p_working && fl.noHttps ? 1 : 0;
   f.w_noMobile = f.p_working && fl.noMobile ? 1 : 0;
   f.w_outdated = f.p_working && fl.outdated ? 1 : 0;
@@ -175,6 +181,13 @@ export function extractFeatures(b) {
   return f;
 }
 
+// Segmentos cuja rotina gira em torno de agenda, pedidos, orçamentos ou cobrança recorrente:
+// é onde automação e sistemas mais economizam tempo e trazem faturamento.
+const OPS_HEAVY = new Set(['dentista', 'clinica', 'estetica', 'fisioterapia', 'psicologia', 'nutricao', 'veterinario', 'laboratorio', 'manipulacao',
+  'advocacia', 'contabilidade', 'imobiliaria', 'seguros', 'viagens', 'provedor', 'salao', 'barbearia', 'unhas', 'academia', 'idiomas', 'escola', 'autoescola', 'cursos',
+  'oficina', 'estetica_auto', 'moveis', 'marmoraria', 'reformas', 'dedetizacao', 'restaurante', 'pizzaria', 'confeitaria', 'petshop', 'grafica', 'tecnologia',
+  'hospedagem', 'eventos', 'transportadora', 'distribuidora', 'veiculos', 'confeccao']);
+
 const FREE_MAIL = /^(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|bol|uol|terra|ig|globo|globomail|icloud|me|mac|r7|zipmail|oi|superig|gmx|protonmail|proton|aol|zoho|yandex)\./i;
 
 export function monthsSince(iso) {
@@ -203,6 +216,7 @@ function labelFor(key, b, f) {
     case 'rating_c': return `Nota ${String(b.rating).replace('.', ',')} no Google`;
     case 'tier_A': return `Nicho de ticket alto (${niche?.label?.toLowerCase() || 'segmento'})`;
     case 'tier_C': return `Nicho de ticket baixo (${niche?.label?.toLowerCase() || 'segmento'})`;
+    case 'ops_heavy': return `${niche?.label || 'Segmento'}: rotina que dá para automatizar`;
     case 'phone_mobile': return 'Celular: dá para chamar no WhatsApp';
     case 'phone_none': return 'Sem telefone cadastrado';
     case 'competitor_share': return `${Math.round(f.competitor_share * 100)}% dos concorrentes têm site`;
@@ -284,7 +298,7 @@ export function painOf(b) {
       if (fl.slow) return { code: 'site_fraco', label: 'Site lento' };
       return { code: 'site_fraco', label: 'Site fraco' };
     }
-    case 'ok': return { code: 'site_ok', label: 'Site ok' };
+    case 'ok': return { code: 'site_ok', label: 'Site ok: automação' };
     default: return { code: 'sem_site', label: 'Sem site' };
   }
 }

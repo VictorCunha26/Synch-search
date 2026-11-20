@@ -17,6 +17,8 @@ export const NICHES = [
   { id: 'psicologia', cnae: ['8650003'], label: 'Psicologia', group: 'Saúde', tier: 'A', google: ['psicólogo', 'clínica de psicologia'], osm: ['"healthcare"="psychotherapist"', '"office"="psychologist"'], best: 'seg–qui, 12h–14h' },
   { id: 'nutricao', cnae: ['8650002'], label: 'Nutricionistas', group: 'Saúde', tier: 'A', google: ['nutricionista'], osm: ['"healthcare"="nutrition_counselling"'], best: 'ter–qui, 12h–14h' },
   { id: 'veterinario', cnae: ['7500100'], label: 'Veterinários', group: 'Saúde', tier: 'A', google: ['clínica veterinária'], osm: ['"amenity"="veterinary"'], best: 'ter–qui, 10h–12h' },
+  { id: 'laboratorio', cnae: ['8640202'], label: 'Laboratórios de análises', group: 'Saúde', tier: 'A', google: ['laboratório de análises clínicas'], osm: ['"healthcare"="laboratory"'], best: 'ter–qui, 10h–12h' },
+  { id: 'manipulacao', cnae: ['4771702'], label: 'Farmácias de manipulação', group: 'Saúde', tier: 'B', google: ['farmácia de manipulação'], osm: ['"amenity"="pharmacy"]["name"~"manipula",i'], best: 'ter–qui, 14h–16h' },
   { id: 'otica', cnae: ['4774100'], label: 'Óticas', group: 'Saúde', tier: 'B', google: ['ótica'], osm: ['"shop"="optician"'], best: 'ter–qui, 10h–12h' },
 
   // Serviços profissionais
@@ -26,6 +28,9 @@ export const NICHES = [
   { id: 'arquitetura', cnae: ['7111100', '7410202'], label: 'Arquitetura e interiores', group: 'Serviços profissionais', tier: 'A', google: ['escritório de arquitetura', 'design de interiores'], osm: ['"office"="architect"'], best: 'ter–qui, 10h–12h' },
   { id: 'seguros', cnae: ['6622300'], label: 'Corretoras de seguros', group: 'Serviços profissionais', tier: 'A', google: ['corretora de seguros'], osm: ['"office"="insurance"'], best: 'ter–qui, 9h–11h' },
   { id: 'fotografia', cnae: ['7420001', '7420004'], label: 'Fotógrafos', group: 'Serviços profissionais', tier: 'A', google: ['estúdio de fotografia', 'fotógrafo'], osm: ['"craft"="photographer"', '"shop"="photo"'], best: 'seg–qua, 10h–12h' },
+
+  { id: 'viagens', cnae: ['7911200'], label: 'Agências de viagem', group: 'Serviços profissionais', tier: 'A', google: ['agência de viagens'], osm: ['"shop"="travel_agency"'], best: 'ter–qui, 10h–12h' },
+  { id: 'provedor', cnae: ['6190601'], label: 'Provedores de internet', group: 'Serviços profissionais', tier: 'A', google: ['provedor de internet'], osm: ['"office"="telecommunication"'], best: 'ter–qui, 10h–12h' },
 
   // Beleza
   { id: 'salao', cnae: ['9602501'], label: 'Salões de beleza', group: 'Beleza', tier: 'B', google: ['salão de beleza'], osm: ['"shop"="hairdresser"'], best: 'ter–qua, 9h–10h30' },
@@ -67,6 +72,12 @@ export const NICHES = [
   { id: 'tecnologia', cnae: ['4751201', '9511800', '9512600', '4752100'], label: 'Informática e celulares', group: 'Comércio', tier: 'B', google: ['assistência técnica celular', 'loja de informática'], osm: ['"shop"="computer"', '"shop"="mobile_phone"', '"shop"="electronics"'], best: 'ter–qui, 10h–12h' },
   { id: 'grafica', cnae: ['1813001', '1813099', '8219901'], label: 'Gráficas', group: 'Comércio', tier: 'B', google: ['gráfica'], osm: ['"shop"="copyshop"', '"craft"="printer"'], best: 'ter–qui, 9h–11h' },
   { id: 'mercado', cnae: ['4712100', '4724500'], label: 'Mercados e empórios', group: 'Comércio', tier: 'C', google: ['empório', 'mercadinho'], osm: ['"shop"="convenience"', '"shop"="deli"', '"shop"="greengrocer"'], best: 'ter–qui, 14h–16h' },
+
+  // Empresas, comércio atacadista e indústria: aqui a venda é de automação e sistemas, mais do que de site.
+  { id: 'transportadora', cnae: ['4930201', '4930202', '4930204'], label: 'Transportadoras e mudanças', group: 'Empresas e indústria', tier: 'A', google: ['transportadora', 'empresa de mudanças'], osm: ['"office"="logistics"', '"office"="moving_company"'], best: 'ter–qui, 9h–11h' },
+  { id: 'distribuidora', cnae: ['4639701', '4691500'], label: 'Distribuidoras e atacados', group: 'Empresas e indústria', tier: 'A', google: ['distribuidora', 'atacadista'], osm: ['"shop"="wholesale"'], best: 'ter–qui, 9h–11h' },
+  { id: 'veiculos', cnae: ['4511101', '4511102'], label: 'Lojas de veículos', group: 'Empresas e indústria', tier: 'A', google: ['loja de carros seminovos'], osm: ['"shop"="car"'], best: 'ter–qui, 10h–12h' },
+  { id: 'confeccao', cnae: ['1412601'], label: 'Confecções', group: 'Empresas e indústria', tier: 'B', google: ['confecção de roupas'], osm: ['"craft"="dressmaker"'], best: 'ter–qui, 9h–11h' },
 
   // Hospedagem e eventos
   { id: 'hospedagem', cnae: ['5510801', '5510802', '5590601', '5590699', '5590603'], label: 'Pousadas e hotéis', group: 'Hospedagem e eventos', tier: 'A', google: ['pousada', 'hotel'], osm: ['"tourism"="guest_house"', '"tourism"="hotel"', '"tourism"="hostel"'], best: 'seg–qui, 10h–12h' },

@@ -83,7 +83,7 @@ Cada pessoa do time escolhe seu nome no canto inferior esquerdo. Não há login,
 3. Edite *O que a IA sabe sobre a Synch*: serviços, preços, prazos e como agendar. Ela não inventa o que não estiver ali.
 4. No painel de um lead, mande a abordagem com **Enviar agora** e ligue **IA responde**. Enquanto o servidor estiver rodando, ela responde o cliente (espera ~9 s para juntar mensagens seguidas e simula digitação).
 
-Regras de segurança: só conversas de leads abordados são lidas (o resto do WhatsApp é ignorado); a IA pausa sozinha quando o cliente pede preço, reunião ou uma pessoa, quando diz que não tem interesse, quando você responde pelo celular, ou depois de 25 mensagens no dia. Usa o pareamento do WhatsApp Web (biblioteca Baileys), não a API oficial da Meta: evite disparos em massa para o número não ser bloqueado.
+Regras de segurança: só conversas de leads abordados são lidas (o resto do WhatsApp é ignorado); quando o cliente aceita reunião, pede uma pessoa ou insiste no preço, a IA avisa o vendedor e continua atendendo; se você responde pelo celular ou pelo app, ela lê o que você escreveu e segue a mesma linha. Ela só pausa quando o cliente diz que não tem interesse, depois de 25 mensagens no dia, ou quando você desliga o interruptor. Usa o pareamento do WhatsApp Web (biblioteca Baileys), não a API oficial da Meta: evite disparos em massa para o número não ser bloqueado.
 
 ## Estrutura
 

@@ -47,7 +47,7 @@ function Findings({ lead }) {
             <span>{t}</span>
           </li>
         ))}
-        {ok && <li><CheckCircle2 size={15} strokeWidth={1.75} color="var(--pos)" /><span>Site funcionando, com HTTPS e adaptado ao celular. Pouca dor para explorar.</span></li>}
+        {ok && <li><CheckCircle2 size={15} strokeWidth={1.75} color="var(--pos)" /><span>Site funcionando, com HTTPS e adaptado ao celular. A conversa aqui é sobre automação e sistemas.</span></li>}
       </ul>
       {(a.ms || a.generator || a.copyrightYear || a.title) && (
         <dl className="kv">

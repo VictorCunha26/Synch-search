@@ -7,7 +7,7 @@ export const PAINS = [
   { code: 'so_social', label: 'Só rede social' },
   { code: 'so_marketplace', label: 'Só marketplace' },
   { code: 'site_fraco', label: 'Site fraco' },
-  { code: 'site_ok', label: 'Site ok' },
+  { code: 'site_ok', label: 'Site ok (automação e sistemas)' },
 ];
 
 export function painClass(code) {

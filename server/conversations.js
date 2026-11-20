@@ -2,13 +2,15 @@
 import { db, getSetting } from './db.js';
 import { classifyPhone } from './scoring.js';
 import { bus, setIncomingHandler, sendText, resolveJid, markRead, waStatus } from './whatsapp.js';
-import { nextReply, aiReady, friendlyError, NO_QUOTA } from './agent.js';
+import { nextReply, aiReady, friendlyError, NO_QUOTA, HANDOFF_PREFIX } from './agent.js';
 
 const DEBOUNCE_MS = 9_000;           // cliente costuma mandar várias mensagens seguidas
 const MAX_AI_PER_DAY = 25;           // trava de segurança por lead
 const timers = new Map();            // business_id -> timeout da próxima resposta
-const running = new Set();
-const retryCount = new Map();      // business_id -> tentativas seguidas por sobrecarga           // business_id com resposta sendo gerada
+const running = new Set();           // business_id com resposta sendo gerada
+const retryCount = new Map();        // business_id -> tentativas seguidas por sobrecarga
+export const SILENT_DAYS = 5;        // sem resposta do cliente por mais que isso: lead perdido
+const SILENT_PREFIX = 'Sem resposta do cliente';
 
 const phoneKey = (digits) => {
   if (!digits) return null;
@@ -94,21 +96,54 @@ async function onIncoming({ id, fromMe, jid, pnJid, text, pushName }) {
     await new Promise((r) => setTimeout(r, 1500));
     if (db.prepare('SELECT 1 FROM messages WHERE wa_id = ?').get(id)) return;
     saveMessage(lead.id, { direction: 'out', author: lead.owner || 'vendedor', text, waId: id });
-    if (lead.ai_enabled) {
-      // Um humano respondeu pelo celular: a IA sai da frente para não atropelar.
-      pauseAi(lead.id, 'Você respondeu pelo celular, então a IA pausou nesta conversa.');
-    }
+    // Um humano respondeu pelo celular. A IA continua ligada: ela não responde em cima dele
+    // (só responde mensagem do cliente) e lê o que o vendedor disse para seguir a mesma linha.
+    clearTimeout(timers.get(lead.id)); timers.delete(lead.id);
+    if (lead.ai_state?.startsWith(HANDOFF_PREFIX)) setState(lead.id, null); // o vendedor já assumiu o que foi pedido
     return;
   }
 
   const msg = saveMessage(lead.id, { direction: 'in', author: 'cliente', text, waId: id });
   if (!msg) return;
-  if (['novo', 'contatado'].includes(lead.status)) {
+  if (lead.status === 'perdido' && lead.ai_state?.startsWith(SILENT_PREFIX)) {
+    // Estava perdido só por silêncio e o cliente voltou: reabre a negociação.
+    db.prepare(`UPDATE businesses SET status = 'respondeu', closed_at = NULL, ai_state = NULL, updated_at = datetime('now') WHERE id = ?`).run(lead.id);
+    logEvent(lead.id, 'WhatsApp', 'status', 'perdido → respondeu (cliente voltou a responder)');
+    emitLead(lead.id);
+  } else if (['novo', 'contatado'].includes(lead.status)) {
     db.prepare(`UPDATE businesses SET status = 'respondeu', contacted_at = COALESCE(contacted_at, datetime('now')), updated_at = datetime('now') WHERE id = ?`).run(lead.id);
     logEvent(lead.id, 'WhatsApp', 'status', `${lead.status} → respondeu`);
     emitLead(lead.id);
   }
   if (lead.ai_enabled) { markRead(jid, id); schedule(lead.id); }
+}
+
+/** Fecha o lead como perdido (ganho, perdido e descartado não mudam). */
+function markLost(businessId, reason, aiState) {
+  const row = db.prepare('SELECT status FROM businesses WHERE id = ?').get(businessId);
+  if (!row || ['ganho', 'perdido', 'descartado'].includes(row.status)) return false;
+  db.prepare(`UPDATE businesses SET status = 'perdido', closed_at = datetime('now'), updated_at = datetime('now'), ai_state = COALESCE(?, ai_state) WHERE id = ?`).run(aiState ?? null, businessId);
+  logEvent(businessId, 'IA', 'status', `${row.status} → perdido (${reason})`);
+  emitLead(businessId);
+  return true;
+}
+
+/**
+ * Conversas em que a última mensagem é nossa e o cliente não responde há mais de SILENT_DAYS dias
+ * viram "perdido". Reunião marcada não entra: ali o silêncio é esperado.
+ * A IA continua ligada: se o cliente voltar a escrever, o lead volta para "Respondeu".
+ */
+export function sweepSilent(days = SILENT_DAYS) {
+  const rows = db.prepare(`
+    SELECT b.id FROM businesses b
+    JOIN messages m ON m.id = (SELECT MAX(id) FROM messages WHERE business_id = b.id)
+    WHERE b.status IN ('contatado', 'respondeu', 'proposta') AND m.direction = 'out' AND m.at <= datetime('now', ?)`).all(`-${days} days`);
+  let n = 0;
+  for (const { id } of rows) {
+    if (markLost(id, `${days}+ dias sem resposta`, `${SILENT_PREFIX} há mais de ${days} dias: marcado como perdido. Se ele responder, volta para Respondeu.`)) n++;
+  }
+  if (n) console.log(`[ia] ${n} lead(s) marcados como perdidos por ${days}+ dias sem resposta`);
+  return n;
 }
 
 function schedule(businessId, delay = DEBOUNCE_MS) {
@@ -155,9 +190,16 @@ async function reply(businessId) {
       db.prepare(`UPDATE businesses SET status = 'reuniao', updated_at = datetime('now') WHERE id = ?`).run(businessId);
       logEvent(businessId, 'IA', 'status', `${lead.status} → reuniao`);
     }
-    if (out.stage === 'sem_interesse') pauseAi(businessId, 'O cliente disse que não tem interesse. A IA se despediu e parou.');
-    else if (out.handoff) pauseAi(businessId, out.handoff_reason || 'O cliente precisa de um humano.');
-    else setState(businessId, null);
+    if (out.stage === 'sem_interesse') {
+      markLost(businessId, 'cliente sem interesse');
+      pauseAi(businessId, 'O cliente disse que não tem interesse: marcado como perdido. A IA se despediu e parou.');
+    }
+    else if (out.handoff) {
+      // Avisa o vendedor, mas a IA continua atendendo: o cliente nunca fica sem resposta.
+      const reason = out.handoff_reason || 'o cliente precisa de um humano';
+      setState(businessId, `${HANDOFF_PREFIX}${reason.charAt(0).toLowerCase()}${reason.slice(1).replace(/\.$/, '')}. A IA continua respondendo até você assumir.`);
+      logEvent(businessId, 'IA', 'ia', `chamou o vendedor: ${reason}`);
+    } else if (!lead.ai_state?.startsWith(HANDOFF_PREFIX)) setState(businessId, null); // o aviso ao vendedor fica até ele agir
     retryCount.delete(businessId);
     emitLead(businessId);
   } catch (e) {
@@ -201,6 +243,7 @@ export async function sendFromApp(businessId, text, who) {
     logEvent(businessId, who, 'status', 'novo → contatado');
   }
   logEvent(businessId, who, 'whatsapp', null);
+  if (lead.ai_state?.startsWith(HANDOFF_PREFIX)) db.prepare('UPDATE businesses SET ai_state = NULL WHERE id = ?').run(businessId); // o vendedor já agiu
   emitLead(businessId);
   return msg;
 }
@@ -236,3 +279,9 @@ function resumePending() {
 export const _onIncoming = onIncoming; // para testes
 setIncomingHandler((m) => { onIncoming(m).catch((e) => console.error('[whatsapp]', e)); });
 bus.on('status', (s) => { if (s.status === 'open') resumePending(); });
+
+// Confere os silêncios ao iniciar e a cada hora.
+if (!process.env.SYNCH_DB?.includes(':memory:')) {
+  setTimeout(() => { try { sweepSilent(); } catch (e) { console.error('[ia] verificação de silêncio falhou:', e.message); } }, 15_000).unref();
+  setInterval(() => { try { sweepSilent(); } catch (e) { console.error('[ia] verificação de silêncio falhou:', e.message); } }, 60 * 60_000).unref();
+}

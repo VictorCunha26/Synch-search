@@ -20,10 +20,11 @@ test('site fora do ar + boa reputação = lead quente', () => {
   assert.equal(s.pain.code, 'site_fora');
 });
 
-test('site bom pontua baixo', () => {
-  const s = scoreBusiness({ ...base, audit: { kind: 'ok', flags: {} } });
-  assert.equal(s.temperature, 'frio');
-  assert.ok(s.score < 30, `nota ${s.score}`);
+test('site bom ainda é lead (automação), mas abaixo de quem não tem site', () => {
+  const ok = scoreBusiness({ ...base, audit: { kind: 'ok', flags: {}, hasWhats: true } });
+  const none = scoreBusiness({ ...base, audit: { kind: 'none' } });
+  assert.notEqual(ok.temperature, 'frio');
+  assert.ok(ok.score < none.score - 15, `ok ${ok.score} / sem site ${none.score}`);
 });
 
 test('franquia cai para frio mesmo sem site', () => {
@@ -54,9 +55,14 @@ test('aprendizado move os pesos na direção dos resultados', () => {
   assert.ok(fit.weights.p_none < PRIOR.p_none);
 });
 
-test('abordagem usa a dor e gera link de WhatsApp', () => {
+test('abordagem apresenta a Synch, cita o segmento, pergunta o problema e gera link de WhatsApp', () => {
   const a = buildApproach({ ...base, neighborhood: 'Cambuí', audit: { kind: 'social', platform: 'Instagram' } }, { seller: 'Victor' });
-  assert.match(a.whatsappText, /Instagram/);
+  assert.match(a.whatsappText, /^(Bom dia|Boa tarde|Boa noite)! /);
+  assert.match(a.whatsappText, /empresa de tecnologia/);
+  assert.doesNotMatch(a.whatsappText, /por exemplo|criamos|automatizamos/); // primeira mensagem só pergunta, não oferece solução
+  assert.match(a.whatsappText, /principal problema que a Odonto Sorriso enfrenta hoje\?$/);
+  const broken = buildApproach({ ...base, audit: { kind: 'broken' } });
+  assert.match(broken.whatsappText, /site de vocês não está abrindo/);
   assert.match(a.whatsappUrl, /^https:\/\/wa\.me\/5519998765432\?text=/);
 });
 

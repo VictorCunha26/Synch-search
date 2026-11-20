@@ -123,7 +123,7 @@ export default function WhatsAppSettings({ settings, reload }) {
               </label>
               <div style={{ display: 'flex', gap: 8, marginTop: 8, alignItems: 'center' }}>
                 <button className="btn" disabled={busy || ignore === ignoreSaved} onClick={() => call(async () => { await api.put('/api/settings', { aiIgnore: ignore.split(/[\n,;]+/) }); toast('Lista salva.'); reload(); })}>Salvar lista</button>
-                <span className="faint" style={{ fontSize: 12 }}>Use para família, amigos e fornecedores. Se você responder alguém pelo celular, a IA também sai daquela conversa.</span>
+                <span className="faint" style={{ fontSize: 12 }}>Use para família, amigos e fornecedores. Para tirar a IA de uma conversa específica, desligue o interruptor “IA responde” naquele contato.</span>
               </div>
             </div>
           )}
