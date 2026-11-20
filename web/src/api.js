@@ -14,10 +14,14 @@ async function req(method, url, body) {
   if (seller) headers['X-Seller'] = encodeURIComponent(seller);
   if (body !== undefined) headers['Content-Type'] = 'application/json';
   let res;
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 60_000); // nenhum botão fica girando para sempre
   try {
-    res = await fetch(url, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined });
-  } catch {
-    throw new Error('Sem conexão com o servidor do Synch Search. Ele está rodando?');
+    res = await fetch(url, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined, signal: ctl.signal });
+  } catch (e) {
+    throw new Error(e.name === 'AbortError' ? 'O servidor demorou demais para responder. Tente de novo.' : 'Sem conexão com o servidor do Synch Search. Ele está rodando?');
+  } finally {
+    clearTimeout(timer);
   }
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || `Erro ${res.status}`);

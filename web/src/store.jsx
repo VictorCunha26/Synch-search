@@ -14,6 +14,32 @@ export function StoreProvider({ children }) {
   }, []);
 
   useEffect(() => { refreshMeta(); }, [refreshMeta]);
+
+  // Estado do WhatsApp/IA ao vivo: um único canal SSE para o app inteiro.
+  const [wa, setWa] = useState(null);
+  useEffect(() => {
+    let es;
+    let retry;
+    let lastBeat = Date.now();
+    const beat = () => { lastBeat = Date.now(); };
+    const open = () => {
+      es?.close();
+      beat();
+      es = new EventSource('/api/wa/events');
+      es.addEventListener('status', (e) => { beat(); setWa(JSON.parse(e.data)); });
+      es.addEventListener('message', (e) => { beat(); window.dispatchEvent(new CustomEvent('synch:wa-message', { detail: JSON.parse(e.data) })); });
+      es.addEventListener('lead', (e) => { beat(); window.dispatchEvent(new CustomEvent('synch:wa-lead', { detail: JSON.parse(e.data) })); });
+      es.addEventListener('ping', beat);
+      es.onerror = () => { es.close(); clearTimeout(retry); retry = setTimeout(open, 3000); };
+    };
+    open();
+    // Vigia: se o canal ficar mudo (ex.: servidor reiniciou atrás do proxy), reabre e busca o estado atual.
+    const watch = setInterval(() => {
+      if (Date.now() - lastBeat > 35000) open();
+      api.get('/api/wa').then(setWa).catch(() => {});
+    }, 10000);
+    return () => { clearTimeout(retry); clearInterval(watch); es?.close(); };
+  }, []);
   useEffect(() => {
     const on = () => setSellerState(getSeller());
     window.addEventListener('synch:seller', on);
@@ -26,7 +52,7 @@ export function StoreProvider({ children }) {
     setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), opts.ms || 3600);
   }, []);
 
-  const value = useMemo(() => ({ meta, refreshMeta, seller, toast }), [meta, refreshMeta, seller, toast]);
+  const value = useMemo(() => ({ meta, refreshMeta, seller, toast, wa, setWa }), [meta, refreshMeta, seller, toast, wa]);
   return (
     <Ctx.Provider value={value}>
       {children}

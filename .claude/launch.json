@@ -4,7 +4,19 @@
     {
       "name": "synch-search",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 5173
+    },
+    {
+      "name": "synch-search-ui",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "SYNCH_NO_WA=1 npm run dev"
+      ],
       "port": 5173
     }
   ]

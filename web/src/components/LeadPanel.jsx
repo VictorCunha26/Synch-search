@@ -4,6 +4,7 @@ import {
 } from 'lucide-react';
 import { api } from '../api.js';
 import { useStore } from '../store.jsx';
+import AiChat from './AiChat.jsx';
 import { TEMP_LABEL, fmtInt, fmtRating, fmtMoney, phoneDisplay, relTime, avatarColor, initials } from '../format.js';
 
 function ScoreBreakdown({ lead }) {
@@ -61,10 +62,16 @@ function Findings({ lead }) {
   );
 }
 
-function Approach({ lead, onAction }) {
+function Approach({ lead, onAction, onSent }) {
   const [tab, setTab] = useState('whats');
   const [text, setText] = useState(lead.approach?.whatsappText || '');
-  const { toast } = useStore();
+  const [sending, setSending] = useState(false);
+  const { toast, wa } = useStore();
+  const sendNow = async () => {
+    setSending(true);
+    try { await api.post(`/api/leads/${lead.id}/messages`, { text }); toast('Mensagem enviada pelo WhatsApp.'); onSent?.(); }
+    catch (e) { toast(e.message); } finally { setSending(false); }
+  };
   useEffect(() => { setText(lead.approach?.whatsappText || ''); }, [lead.id, lead.approach?.whatsappText]);
   const ap = lead.approach || {};
   const waBase = ap.whatsappUrl ? ap.whatsappUrl.split('?')[0] : null;
@@ -80,7 +87,14 @@ function Approach({ lead, onAction }) {
         <>
           <textarea className="textarea" rows={7} value={text} onChange={(e) => setText(e.target.value)} aria-label="Mensagem de WhatsApp" />
           <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-            {waBase ? (
+            {waBase && wa?.status === 'open' ? (
+              <>
+                <button className="btn wa" style={{ flex: 1 }} onClick={sendNow} disabled={sending || !text.trim()} title="Envia pelo WhatsApp conectado ao Synch Search">
+                  <MessageCircle size={16} strokeWidth={1.75} />{sending ? 'Enviando…' : 'Enviar agora'}
+                </button>
+                <a className="btn icon" title="Abrir no app do WhatsApp" href={`${waBase}?text=${encodeURIComponent(text)}`} target="_blank" rel="noreferrer" onClick={() => onAction('whatsapp')}><ExternalLink size={15} strokeWidth={1.75} /></a>
+              </>
+            ) : waBase ? (
               <a className="btn wa" style={{ flex: 1 }} href={`${waBase}?text=${encodeURIComponent(text)}`} target="_blank" rel="noreferrer" onClick={() => onAction('whatsapp')}>
                 <MessageCircle size={16} strokeWidth={1.75} />Abrir no WhatsApp
               </a>
@@ -99,7 +113,7 @@ function Approach({ lead, onAction }) {
           {ap.call?.map((s) => <li key={s.step}><b>{s.step}</b>{s.text}</li>)}
         </ol>
       )}
-      {tab === 'obj' && ap.objections?.map((o) => <div className="objection" key={o.q}><b>{o.q}</b>{o.a}</div>)}
+      {tab === 'obj' && <div className="objections">{ap.objections?.map((o) => <div className="objection" key={o.q}><b>{o.q}</b>{o.a}</div>)}</div>}
       <div className="besttime"><Clock size={14} strokeWidth={1.75} />Melhor horário para este segmento: {ap.bestTime}</div>
     </div>
   );
@@ -230,7 +244,9 @@ export default function LeadPanel({ leadId, onClose, onChanged, docked = false, 
               </dl>
             </div>
 
-            <Approach lead={l} onAction={onAction} />
+            <AiChat lead={l} onChanged={() => load(l.id)} />
+
+            <Approach lead={l} onAction={onAction} onSent={() => load(l.id)} />
 
             <div className="section">
               <h3>Pipeline</h3>
@@ -290,10 +306,11 @@ export default function LeadPanel({ leadId, onClose, onChanged, docked = false, 
 function describeEvent(ev, statuses) {
   const lbl = (id) => statuses?.find((s) => s.id === id)?.label || id;
   if (ev.type === 'status') { const [a, b] = (ev.detail || '').split(' → '); return `mudou de ${lbl(a)} para ${lbl(b)}`; }
-  if (ev.type === 'whatsapp') return 'abriu conversa no WhatsApp';
+  if (ev.type === 'whatsapp') return ev.who === 'IA' ? 'respondeu no WhatsApp' : 'mandou mensagem no WhatsApp';
   if (ev.type === 'ligacao') return 'ligou';
   if (ev.type === 'email') return 'enviou e-mail';
   if (ev.type === 'owner') return ev.detail;
   if (ev.type === 'followup') return `agendou ${ev.detail}`;
+  if (ev.type === 'ia') return ev.detail;
   return ev.detail || ev.type;
 }

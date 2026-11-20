@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, CircleMarker, Tooltip, useMap } from 'react-le
 
 // Escala fixa de 4 degraus: o tamanho do pino diz a nota sem precisar ler o número.
 const radiusFor = (s) => (s >= 85 ? 11 : s >= 70 ? 8.5 : s >= 45 ? 6.5 : 4.5);
-const COLOR = { quente: '#e5484d', morno: '#f5a524', frio: '#a3a3a3' };
+const COLOR = { quente: '#ff453a', morno: '#ff9f0a', frio: '#8e8e93' };
 
 function Fit({ points, center }) {
   const map = useMap();
@@ -38,7 +38,7 @@ export default function MapView({ leads, selectedId, onSelect, center }) {
             key={l.id}
             center={[l.lat, l.lon]}
             radius={radiusFor(l.score) + (l.id === selectedId ? 2 : 0)}
-            pathOptions={{ color: l.id === selectedId ? '#0a0a0a' : '#ffffff', weight: l.id === selectedId ? 2.5 : 1.5, fillColor: COLOR[l.temperature], fillOpacity: 0.92 }}
+            pathOptions={{ color: l.id === selectedId ? '#ffffff' : '#000000', weight: l.id === selectedId ? 2.5 : 1.5, fillColor: COLOR[l.temperature], fillOpacity: 0.92 }}
             eventHandlers={{ click: () => onSelect(l.id) }}
           >
             <Tooltip direction="top" offset={[0, -6]}>

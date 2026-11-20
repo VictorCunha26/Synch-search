@@ -18,7 +18,7 @@ const NAV = [
 ];
 
 function Sidebar({ route, queueCount }) {
-  const { meta, seller } = useStore();
+  const { meta, seller, wa } = useStore();
   const sellers = meta?.sellers || [];
   return (
     <aside className="sidebar">
@@ -43,6 +43,13 @@ function Sidebar({ route, queueCount }) {
             <small>{meta?.google ? 'Google Places conectado' : 'Google Places desligado'}</small>
           </span>
         </a>
+        <a className="source-status" href="#/configuracoes" title="WhatsApp e IA">
+          <span className={`dot ${wa?.status === 'open' ? 'on' : ''}`} />
+          <span>
+            {wa?.status === 'open' ? 'WhatsApp conectado' : wa?.status === 'qr' ? 'Aguardando QR code' : wa?.status === 'connecting' ? 'Conectando WhatsApp…' : 'WhatsApp desligado'}
+            <small>{!wa?.aiReady ? 'IA sem chave' : wa?.answerAll ? 'IA atendendo todos os números' : wa?.aiActive ? `IA atendendo ${wa.aiActive} ${wa.aiActive === 1 ? 'cliente' : 'clientes'}` : 'IA pronta'}</small>
+          </span>
+        </a>
         <label className="seller-pick">
           <span className="avatar" style={{ opacity: seller ? 1 : 0.6 }}>{seller ? initials(seller) : '?'}</span>
           <span className="sr-only">Vendedor ativo</span>
@@ -60,7 +67,32 @@ function Sidebar({ route, queueCount }) {
   );
 }
 
+// Liquid Glass: a luz segue o cursor. Um único listener, limitado a um quadro por vez.
+const GLOW = '.btn, .nav-item, .card, .q-row, .choice label, .source-status';
+function useGlassLight() {
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    let raf = 0;
+    let last = null;
+    const onMove = (e) => {
+      last = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const el = last.target.closest?.(GLOW);
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${last.clientX - r.left}px`);
+        el.style.setProperty('--my', `${last.clientY - r.top}px`);
+      });
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf); };
+  }, []);
+}
+
 function Shell() {
+  useGlassLight();
   const route = useHashRoute();
   const { seller } = useStore();
   const [queueCount, setQueueCount] = useState(0);

@@ -27,7 +27,7 @@ export function initials(name = '') {
 
 // Identidade preto e branco: avatares monocromáticos, diferenciados pelas iniciais.
 export function avatarColor() {
-  return '#0a0a0a';
+  return '#2c2c2e';
 }
 
 export function relTime(iso) {

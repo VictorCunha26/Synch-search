@@ -12,6 +12,9 @@ import { auditWebsite } from './audit.js';
 import { PRIOR, FEATURE_INFO, FEATURE_GROUPS, currentWeights, trainFromOutcomes, MIN_EXAMPLES } from './scoring.js';
 import { testGoogleKey } from './sources/google.js';
 import { rfbStatus, startRfbImport, cancelRfbImport, latestMonth, UFS } from './sources/rfb.js';
+import { bus, waStatus, connectWhatsApp, disconnectWhatsApp, hasSession } from './whatsapp.js';
+import { aiReady, testGeminiKey, DEFAULT_BRIEF, aiModel, probeModels } from './agent.js';
+import { aiInfo, sendFromApp, setAi, listMessages, aiSummary, answerAll, ignoredNumbers } from './conversations.js';
 
 const app = express();
 app.use(express.json({ limit: '200kb' }));
@@ -38,6 +41,7 @@ app.get('/api/meta', (req, res) => {
     google: Boolean(getSetting('googleKey', '')),
     rfb: (() => { const st = rfbStatus(); return { total: st.total, ufs: st.meta?.ufs || [], month: st.meta?.month || null, running: st.running }; })(),
     company: getSetting('company', 'Synch'),
+    whatsapp: { status: waStatus().status, aiReady: aiReady(), aiActive: aiSummary() },
     sellers,
     model: modelSummary(),
   });
@@ -45,12 +49,33 @@ app.get('/api/meta', (req, res) => {
 
 app.get('/api/settings', (req, res) => {
   const key = getSetting('googleKey', '');
-  res.json({ googleKeyMasked: key ? `${key.slice(0, 6)}…${key.slice(-4)}` : '', hasGoogleKey: Boolean(key), company: getSetting('company', 'Synch') });
+  const gk = getSetting('geminiKey', '');
+  res.json({
+    googleKeyMasked: key ? `${key.slice(0, 6)}…${key.slice(-4)}` : '', hasGoogleKey: Boolean(key), company: getSetting('company', 'Synch'),
+    aiKeyMasked: gk ? `${gk.slice(0, 6)}…${gk.slice(-4)}` : '', hasAiKey: Boolean(gk), aiKeyFromEnv: !gk && aiReady(),
+    aiBrief: getSetting('aiBrief', '') || DEFAULT_BRIEF, aiModel: aiModel(),
+    aiAnswerAll: answerAll(), aiIgnore: ignoredNumbers(),
+  });
 });
 
 app.put('/api/settings', async (req, res) => {
-  const { googleKey, company } = req.body || {};
+  const { googleKey, company, geminiKey, aiBrief, aiAnswerAll, aiIgnore } = req.body || {};
+  if (typeof aiAnswerAll === 'boolean') { setSetting('aiAnswerAll', aiAnswerAll); bus.emit('status', waStatus()); }
+  if (Array.isArray(aiIgnore)) {
+    const nums = [...new Set(aiIgnore.map((n) => String(n).replace(/\D/g, '')).filter((n) => n.length >= 10 && n.length <= 13))].slice(0, 500);
+    setSetting('aiIgnore', nums);
+  }
+  let warning = null;
   if (typeof company === 'string' && company.trim()) setSetting('company', company.trim().slice(0, 60));
+  if (typeof aiBrief === 'string') setSetting('aiBrief', aiBrief.trim().slice(0, 6000));
+  if (typeof geminiKey === 'string') {
+    let k = geminiKey.trim();
+    if (k) {
+      try { const r = await testGeminiKey(k); k = r.key; setSetting('geminiModels', r.models); warning = r.warning || null; } catch (e) { return bad(res, e.message); }
+    }
+    setSetting('geminiKey', k);
+    if (k) probeModels().catch(() => {});
+  }
   if (typeof googleKey === 'string') {
     const k = googleKey.trim();
     if (k) {
@@ -58,7 +83,7 @@ app.put('/api/settings', async (req, res) => {
     }
     setSetting('googleKey', k);
   }
-  res.json({ ok: true });
+  res.json({ ok: true, warning });
 });
 
 app.get('/api/sellers', (req, res) => res.json(db.prepare('SELECT id, name, capacity FROM sellers ORDER BY name').all()));
@@ -173,7 +198,47 @@ app.get('/api/leads/:id', (req, res) => {
   const lead = rowToLead(row);
   const events = db.prepare('SELECT who, type, detail, at FROM events WHERE business_id = ? ORDER BY at DESC, id DESC LIMIT 50').all(row.id);
   const approach = buildApproach({ ...row, audit: lead.audit }, { seller: who(req) || '', company: getSetting('company', 'Synch') });
-  res.json({ ...lead, events, approach });
+  res.json({ ...lead, events, approach, ai: aiInfo(row) });
+});
+
+// ---------- WhatsApp + IA ----------
+app.get('/api/wa', (req, res) => res.json({ ...waStatus(), aiReady: aiReady(), aiActive: aiSummary(), answerAll: answerAll() }));
+app.post('/api/wa/connect', async (req, res) => {
+  try { res.json(await connectWhatsApp()); } catch (e) { bad(res, `Não consegui iniciar o WhatsApp: ${e.message}`, 500); }
+});
+app.post('/api/wa/disconnect', async (req, res) => res.json(await disconnectWhatsApp({ logout: Boolean(req.body?.logout) })));
+
+app.get('/api/wa/events', (req, res) => {
+  res.set({ 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-store', Connection: 'keep-alive', 'X-Accel-Buffering': 'no' });
+  res.flushHeaders();
+  const send = (type, data) => res.write(`event: ${type}\ndata: ${JSON.stringify(data)}\n\n`);
+  const onStatus = (s) => send('status', { ...s, aiReady: aiReady(), aiActive: aiSummary(), answerAll: answerAll() });
+  const onMessage = (m) => send('message', m);
+  const onLead = (l) => send('lead', l);
+  bus.on('status', onStatus); bus.on('message', onMessage); bus.on('lead', onLead);
+  onStatus(waStatus());
+  const ping = setInterval(() => res.write('event: ping\ndata: {}\n\n'), 20000);
+  req.on('close', () => { clearInterval(ping); bus.off('status', onStatus); bus.off('message', onMessage); bus.off('lead', onLead); });
+});
+
+app.get('/api/leads/:id/messages', (req, res) => {
+  const row = db.prepare('SELECT id, ai_enabled, ai_state, wa_jid FROM businesses WHERE id = ?').get(Number(req.params.id));
+  if (!row) return bad(res, 'Lead não encontrado.', 404);
+  res.json({ messages: listMessages(row.id), ai: aiInfo(row) });
+});
+app.post('/api/leads/:id/messages', async (req, res) => {
+  const text = String(req.body?.text || '').trim();
+  if (!text) return bad(res, 'Escreva a mensagem.');
+  if (text.length > 3000) return bad(res, 'Mensagem longa demais.');
+  try { res.json(await sendFromApp(Number(req.params.id), text, who(req))); } catch (e) { bad(res, e.message); }
+});
+app.post('/api/leads/:id/ai', (req, res) => {
+  const id = Number(req.params.id);
+  const enabled = Boolean(req.body?.enabled);
+  if (enabled && !aiReady()) return bad(res, 'Cadastre a chave do Google Gemini em Configurações → WhatsApp e IA.');
+  try { setAi(id, enabled, who(req)); } catch (e) { return bad(res, e.message); }
+  const row = db.prepare('SELECT id, ai_enabled, ai_state, wa_jid FROM businesses WHERE id = ?').get(id);
+  res.json({ ai: aiInfo(row) });
 });
 
 app.patch('/api/leads/:id', (req, res) => {
@@ -317,4 +382,8 @@ const PORT = Number(process.env.SYNCH_PORT) || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   const lan = Object.values(networkInterfaces()).flat().find((i) => i && i.family === 'IPv4' && !i.internal)?.address;
   console.log(`Synch Search API em http://localhost:${PORT}${lan ? `  (rede local: http://${lan}:${PORT})` : ''}`);
+  // A IA fica ligada enquanto o servidor roda: se o WhatsApp já foi pareado, reconecta sozinho.
+  probeModels().catch(() => {});
+  // SYNCH_NO_WA=1 sobe o servidor sem reconectar o WhatsApp (útil para mexer só na interface).
+  if (hasSession() && !process.env.SYNCH_NO_WA) connectWhatsApp().then(() => console.log('WhatsApp: reconectando a sessão salva…')).catch((e) => console.error('WhatsApp:', e.message));
 });

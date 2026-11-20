@@ -40,7 +40,7 @@ export default function LeadTable({ leads, selectedId, onSelect, sort, onSort, s
       <tbody>
         {leads.map((l) => (
           <tr key={l.id} aria-selected={l.id === selectedId} className={freshIds?.has(l.id) ? 'enter' : undefined} onClick={() => onSelect(l.id)}>
-            <td><span className={`score ${l.temperature}`} title={`Propensão ${l.score}/100`}>{l.score}</span></td>
+            <td>{l.score != null && <span className={`score ${l.temperature}`} title={`Propensão ${l.score}/100`}>{l.score}</span>}</td>
             <td>
               <div className="biz">
                 <b>{l.name}</b>
@@ -48,7 +48,7 @@ export default function LeadTable({ leads, selectedId, onSelect, sort, onSort, s
                 <span className={`chip pain-inline ${painClass(l.pain?.code)}`}>{l.pain?.label}</span>
               </div>
             </td>
-            <td data-col="pain"><span className={`chip ${painClass(l.pain?.code)}`}>{l.pain?.label}</span></td>
+            <td data-col="pain">{l.pain?.label && <span className={`chip ${painClass(l.pain?.code)}`}>{l.pain.label}</span>}</td>
             {show('google') && <td>
               {l.reviews != null && l.sources?.includes('google') ? (
                 <span className="rating"><Star size={13} fill="currentColor" strokeWidth={0} />{fmtRating(l.rating)} <span className="faint">({fmtInt(l.reviews)})</span></span>

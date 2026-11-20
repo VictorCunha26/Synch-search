@@ -4,6 +4,7 @@ import { api, setSeller } from '../api.js';
 import { useStore } from '../store.jsx';
 import { avatarColor, initials } from '../format.js';
 import RfbImport from '../components/RfbImport.jsx';
+import WhatsAppSettings from '../components/WhatsAppSettings.jsx';
 
 export default function Settings() {
   const { meta, refreshMeta, seller, toast } = useStore();
@@ -43,6 +44,8 @@ export default function Settings() {
       <div className="page-head"><h1>Configurações</h1></div>
       <div className="page-body">
         <div className="settings">
+          <WhatsAppSettings settings={s} reload={load} />
+
           <RfbImport />
 
           <section className="card-box">

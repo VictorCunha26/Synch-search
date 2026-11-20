@@ -9,14 +9,14 @@ function Row({ l, i, onOpen, onSkip }) {
   return (
     <div className="q-row" onClick={() => onOpen(l.id)} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onOpen(l.id)}>
       <span className="rank">{i + 1}</span>
-      <span className={`score ${l.temperature}`}>{l.score}</span>
+      {l.score != null && <span className={`score ${l.temperature}`}>{l.score}</span>}
       <div style={{ minWidth: 0 }}>
         <div className="biz" style={{ maxWidth: 'none' }}>
           <b>{l.name}</b>
           <span>{[l.nicheLabel, l.neighborhood].filter(Boolean).join(' · ')}{l.reviews != null && l.sources?.includes('google') ? ` · ${fmtRating(l.rating)} ★ (${fmtInt(l.reviews)})` : ''}</span>
         </div>
       </div>
-      <span className={`chip ${painClass(l.pain?.code)}`}>{l.pain?.label}</span>
+      {l.pain?.label ? <span className={`chip ${painClass(l.pain?.code)}`}>{l.pain.label}</span> : l.sources?.includes("whatsapp") && <span className="chip">Chamou no WhatsApp</span>}
       <div className="acts" onClick={(e) => e.stopPropagation()}>
         <button className="btn sm ghost icon" title="Pular para amanhã" onClick={() => onSkip(l)}><SkipForward size={14} strokeWidth={1.75} /></button>
         <button className="btn sm" onClick={() => onOpen(l.id)}>

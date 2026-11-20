@@ -155,7 +155,21 @@ function ensureColumns(table, cols) {
 ensureColumns('businesses', {
   cnpj: 'TEXT', email: 'TEXT', opened_at: 'TEXT', porte: 'TEXT', capital: 'REAL', mei: 'INTEGER',
   natureza: 'TEXT', phone_shared: 'INTEGER', website_derived: 'INTEGER',
+  ai_enabled: 'INTEGER NOT NULL DEFAULT 0', ai_state: 'TEXT', wa_jid: 'TEXT', ai_manual_off: 'INTEGER NOT NULL DEFAULT 0', inbound: 'INTEGER NOT NULL DEFAULT 0',
 });
+db.exec(`
+CREATE TABLE IF NOT EXISTS messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  business_id INTEGER NOT NULL REFERENCES businesses(id) ON DELETE CASCADE,
+  direction TEXT NOT NULL,          -- 'in' (cliente) | 'out' (nós)
+  author TEXT NOT NULL,             -- 'cliente' | 'ia' | nome do vendedor
+  text TEXT NOT NULL,
+  wa_id TEXT UNIQUE,
+  at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_msg_biz ON messages(business_id, id);
+CREATE INDEX IF NOT EXISTS idx_biz_wajid ON businesses(wa_jid) WHERE wa_jid IS NOT NULL;
+`);
 db.exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_biz_cnpj ON businesses(cnpj) WHERE cnpj IS NOT NULL');
 
 // ---- Base CNPJ (Receita Federal) ----

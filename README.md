@@ -76,6 +76,15 @@ A nota vai de 0 a 100. **Quente** é 70 ou mais, **morno** vai de 45 a 69 e **fr
 
 Cada pessoa do time escolhe seu nome no canto inferior esquerdo. Não há login, então use o app só numa rede confiável.
 
+## WhatsApp + IA
+
+1. **Configurações → WhatsApp e IA**: clique em *Conectar WhatsApp* e leia o QR code em *Dispositivos conectados* no celular da empresa. A sessão fica salva em `data/wa-auth` e reconecta sozinha toda vez que o servidor sobe.
+2. Cole a chave grátis do Google Gemini, criada em [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) (ou defina `GEMINI_API_KEY`). O sistema escolhe sozinho o melhor modelo Gemini Flash liberado para a chave. O plano gratuito tem limite diário, e o Google pode usar as conversas para melhorar os produtos dele.
+3. Edite *O que a IA sabe sobre a Synch*: serviços, preços, prazos e como agendar. Ela não inventa o que não estiver ali.
+4. No painel de um lead, mande a abordagem com **Enviar agora** e ligue **IA responde**. Enquanto o servidor estiver rodando, ela responde o cliente (espera ~9 s para juntar mensagens seguidas e simula digitação).
+
+Regras de segurança: só conversas de leads abordados são lidas (o resto do WhatsApp é ignorado); a IA pausa sozinha quando o cliente pede preço, reunião ou uma pessoa, quando diz que não tem interesse, quando você responde pelo celular, ou depois de 25 mensagens no dia. Usa o pareamento do WhatsApp Web (biblioteca Baileys), não a API oficial da Meta: evite disparos em massa para o número não ser bloqueado.
+
 ## Estrutura
 
 ```

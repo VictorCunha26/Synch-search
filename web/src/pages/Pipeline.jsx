@@ -69,9 +69,9 @@ export default function Pipeline() {
                       onDragStart={(e) => { e.dataTransfer.setData('text/plain', String(l.id)); e.dataTransfer.effectAllowed = 'move'; setDragId(l.id); }}
                       onDragEnd={() => setDragId(null)}
                       onClick={() => setSelectedId(l.id)}>
-                      <div className="top"><b>{l.name}</b><span className={`score ${l.temperature}`}>{l.score}</span></div>
+                      <div className="top"><b>{l.name}</b>{l.score != null && <span className={`score ${l.temperature}`}>{l.score}</span>}</div>
                       <div className="bottom">
-                        <span className={`chip ${painClass(l.pain?.code)}`}>{l.pain?.label}</span>
+                        {l.pain?.label ? <span className={`chip ${painClass(l.pain?.code)}`}>{l.pain.label}</span> : l.sources?.includes("whatsapp") && <span className="chip">Chamou no WhatsApp</span>}
                         <span className="faint">{relTime(l.updatedAt)}</span>
                         {l.owner && <span className="avatar sm" title={l.owner} style={{ background: avatarColor(l.owner) }}>{initials(l.owner)}</span>}
                       </div>
